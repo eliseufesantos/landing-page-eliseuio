@@ -938,29 +938,119 @@ p { text-wrap: pretty; }
 @media (max-width: 640px) {
   :root { --gutter: 18px; --section-y: 76px; }
   body { font-size: 16px; }
-  .brand img { width: 100px; }
+  .site-header { background: rgba(250, 251, 252, 0.96); }
+  .nav-shell { min-height: 64px; gap: 14px; }
+  .brand { flex: 0 0 auto; min-width: 0; }
+  .brand img { width: 98px; }
   .status-pill { display: none; }
-  .nav-cta { padding: 9px 13px; min-height: 40px; }
-  .nav-cta span.label { display: none; }
+  .nav-cta {
+    width: auto;
+    min-width: 124px;
+    min-height: 42px;
+    flex: 0 0 auto;
+    padding: 0 14px;
+  }
+  .nav-cta span.label { display: inline; }
   .hero-inner { gap: 40px; padding-top: 48px; padding-bottom: 56px; }
   .hero-copy h1 { font-size: 40px; }
   .console-body { padding: 18px; font-size: 12px; }
   .console-line em { display: none; }
   .btn { width: 100%; }
   .hero-actions .btn, .cta-actions .btn { width: 100%; }
-  .pipeline-track { flex-wrap: wrap; gap: 16px; }
-  .pipe-node { flex: 0 0 40%; }
+  .nav-shell .nav-cta {
+    width: auto;
+    min-width: 124px;
+    flex: 0 0 auto;
+  }
+  .pipeline { margin-top: 36px; border-radius: var(--radius-lg); }
+  .pipeline-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 18px;
+    padding: 26px 20px 28px;
+  }
+  .pipe-node { min-width: 0; }
+  .pipe-node:nth-child(5) { grid-column: 1 / -1; justify-self: center; min-width: 118px; }
   .pipe-node::before { display: none; }
+  .pipe-node .dot { width: 50px; height: 50px; }
+  .pipeline-output .out-copy,
+  .pipeline-output .out-aside { padding: 24px 22px; }
+  .pipeline-output .out-copy h3 { max-width: none; font-size: 24px; }
   .service-grid { grid-template-columns: 1fr; }
   .chaos-board { grid-template-columns: 1fr; }
   .chaos-card, .chaos-card.rot-a, .chaos-card.rot-b, .chaos-card.rot-c, .chaos-card.rot-d { transform: none; animation: none; }
+  .cases-section .section-head p { display: none; }
+  .case-shell { margin-top: 24px; }
+  .case-toolbar {
+    display: block;
+    margin-bottom: 14px;
+  }
+  .case-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 1px 0 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .case-chips::-webkit-scrollbar { display: none; }
+  .case-chip {
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 7px 13px;
+    max-width: 190px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+  }
+  .case-chip:nth-child(3) { grid-column: auto; }
+  .case-controls,
+  .case-dots { display: none; }
+  .icon-btn { width: 42px; height: 42px; }
+  .case-card-v2 { border-radius: var(--radius-lg); }
+  .case-media { min-height: 210px; }
+  .case-media .media-tag { top: 12px; left: 12px; max-width: calc(100% - 24px); }
   .case-detail { padding: 24px; }
   .case-detail h3 { font-size: 28px; }
   .case-metric-value { font-size: 26px; }
+  .case-actions { padding-top: 18px; }
+  .case-actions .btn-wa { display: none; }
   .about-photo { max-width: 340px; margin-left: auto; margin-right: auto; }
-  .partner-card { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .partner-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px;
+  }
+  .partner-logo { width: min(150px, 58vw); }
   .cred-row { grid-template-columns: 1fr; }
-  .fiap-badge { justify-self: start; padding: 16px 22px; }
+  .quote-chip { padding: 20px; }
+  .quote-chip p { font-size: 19px; }
+  .fiap-badge {
+    width: 100%;
+    justify-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 16px 18px;
+    text-align: left;
+  }
+  .fiap-badge img { width: 72px; height: 72px; }
+  .fiap-badge span { margin-top: 0; }
   .footer-grid { grid-template-columns: 1fr; }
   .about-copy h2 { font-size: 34px; }
+}
+
+@media (max-width: 420px) {
+  :root { --gutter: 16px; }
+  .nav-shell { gap: 10px; }
+  .brand img { width: 94px; }
+  .nav-shell .nav-cta { width: auto; min-width: 116px; min-height: 40px; flex-basis: auto; padding: 0 12px; }
+  .pipeline-track { padding-left: 16px; padding-right: 16px; }
+  .case-chips { padding-right: 8px; }
+  .case-chip:nth-child(3) { grid-column: auto; }
 }
