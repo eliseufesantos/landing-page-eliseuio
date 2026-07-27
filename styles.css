@@ -1358,7 +1358,7 @@ main section[id] {
   background: #14181d;
   color: rgba(230, 237, 243, 0.62);
 }
-.footer-grid { display: grid; grid-template-columns: 1.3fr 0.85fr 1.15fr; gap: 48px; align-items: start; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 0.85fr; gap: 64px; align-items: start; }
 .footer img { width: 120px; }
 .footer-brand p { max-width: 32ch; margin-top: 16px; font-size: 15px; }
 .footer-status {
@@ -1373,9 +1373,6 @@ main section[id] {
 .footer-links a svg { width: 16px; height: 16px; color: rgba(230, 237, 243, 0.5); transition: color var(--transition); }
 .footer-links a:hover { color: var(--blue-400); }
 .footer-links a:hover svg { color: var(--blue-400); }
-.footer-signature p { max-width: 24ch; color: var(--text-on-inverse, #e6edf3); font-size: 26px; font-weight: 800; line-height: 1.18; letter-spacing: -0.01em; }
-.footer-mark { display: block; margin-top: 16px; color: rgba(230, 237, 243, 0.4); font-family: var(--font-mono); font-size: 12px; }
-
 /* ============================================================
    FLOATING WHATSAPP — verde, destaque
    ============================================================ */
