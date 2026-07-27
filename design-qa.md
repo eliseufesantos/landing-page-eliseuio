@@ -121,12 +121,51 @@ Correções:
 
 Evidência pós-correção: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-dark-comparison.png`.
 
+### Refinamento de translucidez
+
+- P2 — o grafite com 88% de opacidade criava contraste excessivo contra o fundo branco.
+- Nova referência: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-b2286301-7895-4c27-a4e9-e5546e6070bc.png`.
+
+Correções:
+
+- A superfície passou para `rgba(58, 57, 54, 0.72)`, com 22 px de blur e saturação reduzida.
+- A amostra neutra da referência mede RGB `(112, 111, 105)`; a implementação mede `(112, 111, 109)`.
+- Borda e sombra foram suavizadas, preservando a leitura do logo e dos links.
+- O estado após rolagem usa 80% de opacidade para manter contraste sobre seções mais complexas.
+
+Evidências pós-correção:
+
+- Comparação: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-light-glass-comparison.png`.
+- Desktop: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-light-glass-desktop-top.png`.
+- Mobile fechado: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-light-glass-mobile-closed.png`.
+- Mobile aberto: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-light-glass-mobile-open.png`.
+
+### Refinamento de cor e valorização da marca
+
+- P2 — o cinza quente médio reduzia a separação visual da versão invertida do logo e competia com o azul do “.io”.
+- Nova referência do estado anterior: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-e77dba78-70bf-4122-9baf-014651598763.png`.
+
+Correções:
+
+- A superfície passou para um vidro azul-acinzentado claro em `rgba(205, 218, 234, 0.72)`, com 22 px de blur e 130% de saturação.
+- O logo original escuro voltou ao header, preservando o preto da marca e destacando o azul do “.io”.
+- Os links passaram para tinta escura a 88% de opacidade; o estado após rolagem usa 84% de opacidade na superfície.
+- O mesmo sistema cromático foi aplicado às cápsulas mobile e ao botão do menu, sem alterar geometria, espaçamento ou conteúdo.
+
+Evidências pós-correção:
+
+- Comparação antes/depois: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-color-comparison.png`.
+- Desktop no topo: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-cool-glass-top.png`.
+- Desktop após rolagem: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-cool-glass-desktop.png`.
+- Mobile fechado: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-cool-glass-mobile-closed.png`.
+- Mobile aberto: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-cool-glass-mobile-open.png`.
+
 ## Superfícies de fidelidade
 
 - Tipografia: Satoshi foi preservada; os links usam 18 px e peso 650, ficando proporcionais ao logo e ao CTA.
 - Espaçamento e layout: cápsula desktop de 820 × 64 px com raio total; no mobile, cápsula principal e botão circular separados por 8 px; painel com 238 px de largura e 22 px de raio.
-- Cores: vidro grafite translúcido, borda branca sutil e CTA verde reutilizam a identidade da Eliseu.io com contraste mais forte.
-- Imagens e ícones: a variante invertida do logo foi usada sobre o fundo escuro; menu e fechar usam vetores locais baseados na linguagem Heroicons Outline, sem dependência de rede.
+- Cores: vidro azul-acinzentado claro, borda branca sutil e CTA verde aproximam o header da paleta azul da Eliseu.io sem perder translucidez.
+- Imagens e ícones: a versão original do logo foi usada sobre o vidro claro; menu e fechar usam vetores locais baseados na linguagem Heroicons Outline, sem dependência de rede.
 - Copy: o desktop contém somente logo, “Solução”, “Cases”, “Dúvidas” e “Conversar”; o painel mobile contém somente os três atalhos, sem CTA.
 
 ## Validação funcional, responsiva e de desempenho
