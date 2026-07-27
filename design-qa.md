@@ -72,6 +72,66 @@ final result: passed
 
 ---
 
+# Design QA — seção Dúvidas comuns
+
+## Fonte visual e estado
+
+- Fonte visual: `qa\faq\reference.png`
+- Fonte: 1186 × 876 px.
+- Implementação desktop: `qa\faq\implementation-desktop.png`, 1265 × 926 px.
+- Implementação mobile: `qa\faq\implementation-mobile.png`, 375 × 812 px úteis.
+- Viewport desktop: 1280 × 902 CSS px, DPR 1; a barra de rolagem deixa 1265 px úteis.
+- Viewport mobile: 390 × 844 CSS px, DPR 1; a barra de rolagem deixa 375 px úteis.
+- Estado comparado: todos os cards fechados, sem hover ou foco.
+- Normalização: referência e implementação foram redimensionadas proporcionalmente para 640 px de largura no comparativo, sem interpolação assimétrica ou alteração de proporção.
+
+## Evidências de comparação
+
+- Comparação visual normalizada: `qa\faq\comparison.png`
+- Captura desktop focada na seção: `qa\faq\implementation-desktop.png`
+- Captura responsiva: `qa\faq\implementation-mobile.png`
+
+O comparativo normalizado funciona também como recorte focado, porque todo o componente permanece legível e permite verificar título, largura, altura, intervalos, raios, divisores, numeração e ícones sem depender do restante da página.
+
+## Achados
+
+- Nenhuma diferença P0, P1 ou P2 permaneceu após a comparação.
+- A quantidade de itens é intencionalmente diferente: a referência contém oito perguntas genéricas, enquanto a implementação preserva as seis perguntas reais já existentes no site.
+- A paleta e a família tipográfica seguem os tokens da Eliseu.io, usando a referência como alvo de composição e ritmo.
+- O botão flutuante do WhatsApp é um controle persistente do site e não pertence à seção; sua presença na captura não altera a estrutura do FAQ.
+
+## Histórico de comparação
+
+### Primeira comparação visual
+
+- O título aparece sozinho e centralizado, conforme o pedido.
+- Os cards desktop medem 920 × 82 px, com intervalos uniformes de 12 px.
+- Os cards mobile medem 343 × aproximadamente 77 px, com intervalos uniformes e sem overflow horizontal.
+- Não foram encontrados problemas P0, P1 ou P2; não foi necessária uma iteração corretiva após a comparação.
+
+## Superfícies de fidelidade
+
+- Tipografia: Satoshi foi preservada; o título usa peso 900 e as perguntas peso 800, mantendo hierarquia semelhante à referência.
+- Espaçamento e layout: lista centralizada, cards simétricos, larguras e alturas uniformes, raios consistentes e ritmo vertical regular.
+- Cores: fundo claro e cards em cinza frio reutilizam os tokens existentes, com contraste adequado para texto, divisores e chevrons.
+- Imagens e ícones: a seção não depende de imagens raster; o chevron existente do design system do site foi preservado, com rotação no estado aberto.
+- Copy: toda a copy introdutória foi removida; restou apenas “Dúvidas comuns” acima das perguntas reais.
+
+## Validação funcional e responsiva
+
+- Seis cards encontrados no desktop e no mobile.
+- O primeiro card abriu, exibiu a resposta e fechou novamente.
+- Todos os cards iniciam fechados.
+- Nenhum overflow horizontal em 1280 px ou 390 px.
+- Nenhum erro ou aviso no console.
+- A hierarquia semântica mantém o título como `h2` e usa `details`/`summary` para o acordeão.
+
+## Resultado
+
+final result: passed
+
+---
+
 # Design QA — seção Sobre mim
 
 ## Fonte visual e estado

@@ -156,9 +156,73 @@
   function setupHeader() {
     var header = document.getElementById("siteHeader");
     if (!header) return;
+    var toggle = document.getElementById("menuToggle");
+    var menu = document.getElementById("mobileMenu");
+    var toggleIcon = toggle ? toggle.querySelector("img") : null;
+    var menuPanel = menu ? menu.querySelector(".mobile-menu-panel") : null;
+    var menuLinks = menu ? Array.prototype.slice.call(menu.querySelectorAll(".mobile-menu-panel a")) : [];
+    var menuOpen = false;
+
     var onScroll = function () {
       header.classList.toggle("scrolled", window.scrollY > 12);
     };
+
+    var setMenu = function (open, returnFocus) {
+      if (!toggle || !menu) return;
+      menuOpen = open;
+      document.body.classList.toggle("modal-open", open);
+      header.classList.toggle("menu-open", open);
+      menu.classList.toggle("is-open", open);
+      menu.setAttribute("aria-hidden", String(!open));
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+      if (toggleIcon) toggleIcon.src = open ? "assets/icon-close.svg" : "assets/icon-menu.svg";
+
+      if (open && menuPanel) {
+        window.requestAnimationFrame(function () { menuPanel.focus(); });
+      } else if (returnFocus) {
+        toggle.focus();
+      }
+    };
+
+    if (toggle && menu) {
+      toggle.addEventListener("click", function () {
+        setMenu(!menuOpen, false);
+      });
+
+      menu.addEventListener("click", function (event) {
+        if (event.target.closest("[data-menu-close]")) setMenu(false, true);
+      });
+
+      menuLinks.forEach(function (link) {
+        link.addEventListener("click", function () { setMenu(false, false); });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!menuOpen) return;
+        if (event.key === "Escape") {
+          event.preventDefault();
+          setMenu(false, true);
+          return;
+        }
+        if (event.key !== "Tab") return;
+
+        var focusable = [toggle].concat(menuLinks);
+        var current = focusable.indexOf(document.activeElement);
+        event.preventDefault();
+        if (current === -1) {
+          (event.shiftKey ? toggle : menuLinks[0]).focus();
+          return;
+        }
+        var next = (current + (event.shiftKey ? -1 : 1) + focusable.length) % focusable.length;
+        focusable[next].focus();
+      });
+
+      window.addEventListener("resize", function () {
+        if (menuOpen && window.innerWidth > 980) setMenu(false, false);
+      }, { passive: true });
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }

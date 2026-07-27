@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>FAQ — comparação visual</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px;
+      color: #1f242b;
+      background: #d9dde2;
+      font: 600 13px/1.4 system-ui, sans-serif;
+    }
+    main {
+      display: grid;
+      grid-template-columns: 640px;
+      gap: 24px;
+      justify-content: center;
+    }
+    figure { margin: 0; }
+    figcaption {
+      margin-bottom: 8px;
+      color: #424a53;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .frame {
+      position: relative;
+      width: 640px;
+      height: 474px;
+      overflow: hidden;
+      background: #fafbfc;
+      box-shadow: 0 8px 24px rgba(27, 31, 36, 0.14);
+    }
+    .frame img {
+      position: absolute;
+      left: 0;
+      display: block;
+      width: 640px;
+      height: auto;
+    }
+    .reference img { top: 0; }
+    .implementation img { top: -34.5px; }
+  </style>
+</head>
+<body>
+  <main>
+    <figure>
+      <figcaption>Referência</figcaption>
+      <div class="frame reference">
+        <img src="reference.png" alt="Referência visual da seção de perguntas frequentes">
+      </div>
+    </figure>
+    <figure>
+      <figcaption>Implementação</figcaption>
+      <div class="frame implementation">
+        <img src="implementation-desktop.png" alt="Implementação da seção Dúvidas comuns">
+      </div>
+    </figure>
+  </main>
+</body>
+</html>
