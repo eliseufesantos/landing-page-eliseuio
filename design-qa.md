@@ -79,16 +79,16 @@ final result: passed
 - Fonte desktop: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-df3df670-0e17-4731-acad-2a54c1273aa2.png`, 1450 × 525 px.
 - Fonte mobile fechada: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-83916993-10f6-4f00-a4c6-812a69d1cdba.png`, 390 × 513 px.
 - Fonte mobile aberta: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-1648ef35-8d5e-4ac3-833a-32454721d3a4.png`, 497 × 836 px.
-- Implementação desktop: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-desktop-final.png`, 1425 × 891 px úteis.
-- Implementação mobile fechada: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-mobile-closed-final.png`, 375 × 812 px úteis.
-- Implementação mobile aberta: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-mobile-open-final.png`, 390 × 844 px.
+- Implementação desktop: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-dark-desktop-final.png`, 1425 × 891 px úteis.
+- Implementação mobile fechada: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-dark-mobile-closed.png`, 375 × 812 px úteis.
+- Implementação mobile aberta: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-dark-mobile-open.png`, 390 × 844 px.
 - Viewport desktop: 1440 × 900 CSS px, DPR 1.
 - Viewports mobile: 390 × 844 e 320 × 740 CSS px, DPR 1.
 - Estados: topo da página, header em repouso; menu mobile fechado e aberto.
 
 ## Evidências de comparação
 
-- Comparação combinada: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-qa-comparison.png`.
+- Comparação combinada: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-dark-comparison.png`.
 - A comparação usa recortes equivalentes do header desktop, do header mobile fechado e do conjunto header + painel aberto.
 - Os recortes focados foram necessários porque as referências pertencem a outras marcas; elas são a fonte visual para geometria, translucidez e comportamento, enquanto logo, cores, copy e CTA seguem a identidade Eliseu.io e os requisitos do pedido.
 
@@ -107,12 +107,26 @@ Correções:
 
 Evidência pós-correção: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-mobile-open-final.png`.
 
+### Refinamento de densidade e contraste
+
+- P2 — a cápsula clara de 1180 px deixava aproximadamente 215 px entre a navegação e os elementos laterais, reduzindo a coesão visual.
+- P2 — os links de 15 px tinham menos presença que o logo e o CTA.
+
+Correções:
+
+- A cápsula passou para 820 × 64 px, reduzindo os intervalos laterais para aproximadamente 140 px.
+- Os links passaram para 18 px, peso 650 e contraste de 90% de branco.
+- O vidro claro foi substituído por grafite translúcido, com logo invertido e borda branca sutil.
+- O mesmo tratamento escuro foi aplicado às cápsulas mobile, mantendo o painel aberto claro para separar níveis.
+
+Evidência pós-correção: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-dark-comparison.png`.
+
 ## Superfícies de fidelidade
 
-- Tipografia: Satoshi e os pesos do design system foram preservados; labels compactos e legíveis acompanham o ritmo das referências.
-- Espaçamento e layout: cápsula desktop de 1180 × 72 px com raio total; no mobile, cápsula principal e botão circular separados por 8 px; painel com 238 px de largura e 22 px de raio.
-- Cores: superfícies brancas translúcidas, borda cinza fria e CTA verde reutilizam os tokens existentes da Eliseu.io.
-- Imagens e ícones: logo original preservado; menu e fechar usam vetores locais baseados na linguagem Heroicons Outline, sem dependência de rede.
+- Tipografia: Satoshi foi preservada; os links usam 18 px e peso 650, ficando proporcionais ao logo e ao CTA.
+- Espaçamento e layout: cápsula desktop de 820 × 64 px com raio total; no mobile, cápsula principal e botão circular separados por 8 px; painel com 238 px de largura e 22 px de raio.
+- Cores: vidro grafite translúcido, borda branca sutil e CTA verde reutilizam a identidade da Eliseu.io com contraste mais forte.
+- Imagens e ícones: a variante invertida do logo foi usada sobre o fundo escuro; menu e fechar usam vetores locais baseados na linguagem Heroicons Outline, sem dependência de rede.
 - Copy: o desktop contém somente logo, “Solução”, “Cases”, “Dúvidas” e “Conversar”; o painel mobile contém somente os três atalhos, sem CTA.
 
 ## Validação funcional, responsiva e de desempenho
