@@ -1048,7 +1048,6 @@ main section[id] {
    ============================================================ */
 .about-section {
   padding: clamp(76px, 7vw, 112px) 0;
-  border-top: 1px solid var(--border-default);
   background: var(--surface-page);
   color: var(--text-body);
 }
