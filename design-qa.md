@@ -72,6 +72,74 @@ final result: passed
 
 ---
 
+# Design QA — header translúcido e menu mobile
+
+## Fonte visual e estado
+
+- Fonte desktop: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-df3df670-0e17-4731-acad-2a54c1273aa2.png`, 1450 × 525 px.
+- Fonte mobile fechada: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-83916993-10f6-4f00-a4c6-812a69d1cdba.png`, 390 × 513 px.
+- Fonte mobile aberta: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-1648ef35-8d5e-4ac3-833a-32454721d3a4.png`, 497 × 836 px.
+- Implementação desktop: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-desktop-final.png`, 1425 × 891 px úteis.
+- Implementação mobile fechada: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-mobile-closed-final.png`, 375 × 812 px úteis.
+- Implementação mobile aberta: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-mobile-open-final.png`, 390 × 844 px.
+- Viewport desktop: 1440 × 900 CSS px, DPR 1.
+- Viewports mobile: 390 × 844 e 320 × 740 CSS px, DPR 1.
+- Estados: topo da página, header em repouso; menu mobile fechado e aberto.
+
+## Evidências de comparação
+
+- Comparação combinada: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-qa-comparison.png`.
+- A comparação usa recortes equivalentes do header desktop, do header mobile fechado e do conjunto header + painel aberto.
+- Os recortes focados foram necessários porque as referências pertencem a outras marcas; elas são a fonte visual para geometria, translucidez e comportamento, enquanto logo, cores, copy e CTA seguem a identidade Eliseu.io e os requisitos do pedido.
+
+## Histórico de iterações
+
+### Primeira implementação
+
+- P2 — o primeiro link recebia contorno de foco visível assim que o menu era aberto com o ponteiro.
+- P2 — o ciclo inicial de `Tab` poderia alcançar o backdrop em vez de permanecer entre o botão de fechar e os links do modal.
+
+Correções:
+
+- O foco inicial passou para o próprio diálogo, sem contorno visual; o primeiro `Tab` segue para “Solução”.
+- O ciclo de teclado foi fechado explicitamente entre botão e três atalhos.
+- O backdrop deixou de ser um controle acessível duplicado; fechar continua disponível pelo botão circular, por clique fora e por `Escape`.
+
+Evidência pós-correção: `C:\Users\ELISEU~1\AppData\Local\Temp\eliseu-header-mobile-open-final.png`.
+
+## Superfícies de fidelidade
+
+- Tipografia: Satoshi e os pesos do design system foram preservados; labels compactos e legíveis acompanham o ritmo das referências.
+- Espaçamento e layout: cápsula desktop de 1180 × 72 px com raio total; no mobile, cápsula principal e botão circular separados por 8 px; painel com 238 px de largura e 22 px de raio.
+- Cores: superfícies brancas translúcidas, borda cinza fria e CTA verde reutilizam os tokens existentes da Eliseu.io.
+- Imagens e ícones: logo original preservado; menu e fechar usam vetores locais baseados na linguagem Heroicons Outline, sem dependência de rede.
+- Copy: o desktop contém somente logo, “Solução”, “Cases”, “Dúvidas” e “Conversar”; o painel mobile contém somente os três atalhos, sem CTA.
+
+## Validação funcional, responsiva e de desempenho
+
+- Sem overflow horizontal em 1440, 390 ou 320 px.
+- Menu abre e fecha pelo botão, backdrop e `Escape`.
+- `aria-expanded`, `aria-hidden`, bloqueio de rolagem e devolução de foco foram verificados.
+- `Tab` e `Shift+Tab` permanecem contidos entre o botão de fechar e os três atalhos.
+- O link “Dúvidas” fechou o modal, atualizou `#duvidas` e posicionou a seção a 112 px do topo.
+- Nenhum erro ou aviso no console.
+- Fallback sem `backdrop-filter` e regra de `prefers-reduced-motion` preservados.
+- Nenhuma biblioteca ou fonte adicional foi carregada. Os dois novos ícones somam 435 bytes; a alteração adiciona apenas HTML, CSS e JavaScript nativos.
+
+## Diferenças intencionais
+
+- A referência desktop possui dois CTAs e não possui navegação central; a implementação segue o pedido explícito com três atalhos e um único CTA.
+- A referência mobile aberta possui mais links e um CTA dentro do painel; a implementação remove esses itens conforme o pedido.
+- A cor preta do CTA de referência foi substituída pelo verde de WhatsApp já adotado pela marca.
+
+## Resultado
+
+Não restam diferenças P0, P1 ou P2. A geometria, a translucidez, o comportamento modal, a responsividade e a acessibilidade foram verificadas fielmente contra as referências.
+
+final result: passed
+
+---
+
 # Design QA — seção Dúvidas comuns
 
 ## Fonte visual e estado
