@@ -387,3 +387,127 @@ Evidências pós-correção: comparação focada e captura final das credenciais
 Não restam diferenças P0, P1 ou P2 na seção implementada. A comparação focada confirma alinhamento, escala, ritmo vertical, cores, imagem, copy e credenciais.
 
 final result: passed
+
+---
+
+# Design QA — continuidade Sobre mim → Dúvidas comuns
+
+## Fonte visual e estado
+
+- Fonte visual: `qa\about-faq-continuity\reference.png`
+- Fonte: 1684 × 1258 px.
+- Implementação desktop fechada: `qa\about-faq-continuity\implementation-closed.png`, 1669 × 1247 px úteis.
+- Implementação desktop aberta: `qa\about-faq-continuity\implementation-open.png`, 1669 × 1247 px úteis.
+- Implementação mobile: `qa\about-faq-continuity\implementation-mobile.png`, 375 × 812 px úteis.
+- Viewport desktop: 1684 × 1258 CSS px, DPR 1.
+- Viewport mobile: 390 × 844 CSS px, DPR 1.
+- Estado principal comparado: todos os itens fechados; o estado aberto foi capturado separadamente.
+- Normalização: referência e implementação foram redimensionadas proporcionalmente para 740 px de largura no comparativo, sem distorção.
+
+## Evidências de comparação
+
+- Comparação completa, referência à esquerda e implementação à direita: `qa\about-faq-continuity\comparison.png`
+- Estado fechado focado na transição: `qa\about-faq-continuity\implementation-closed.png`
+- Estado aberto focado na resposta e nos controles: `qa\about-faq-continuity\implementation-open.png`
+- Breakpoint móvel: `qa\about-faq-continuity\implementation-mobile.png`
+
+O comparativo completo mantém textos, curvas, faixa de credenciais, início do FAQ e primeiros cards legíveis; o estado aberto foi usado como recorte adicional para verificar altura, padding, divisor, cor e rotação do chevron.
+
+## Histórico de iterações
+
+### Primeira implementação
+
+- P1 — a página podia reutilizar a versão anterior de `script.js`; nesse caso o atributo `open` mudava, mas a nova área animada permanecia com 0 px de altura.
+- P2 — o limite entre Sobre mim e FAQ ainda precisava funcionar como uma passagem contínua, não como duas faixas apenas encostadas.
+
+Correções:
+
+- O script recebeu uma versão explícita na URL e o CSS ganhou fallback para `details[open]`, garantindo resposta visível mesmo sem a animação JavaScript.
+- A faixa de credenciais passou a sobrepor a entrada do FAQ; o FAQ recebeu fundo azul-claro, curva superior ampla e espaçamento que preserva a leitura da faixa.
+
+Evidência pós-correção:
+
+- Ao abrir, o primeiro item terminou com aproximadamente 171 px de altura, opacidade 1 e `open=true`.
+- Ao fechar, terminou com 0 px, opacidade 0 e `open=false`.
+- Nenhum erro ou aviso foi registrado no console.
+
+## Superfícies de fidelidade
+
+- Tipografia: Satoshi, pesos e hierarquia existentes foram preservados; nenhuma copy mudou.
+- Espaçamento e layout: faixa de credenciais com cantos de até 40 px, sobreposição controlada, FAQ com curva superior responsiva e cards uniformes.
+- Cores e tokens: azul-claro deriva de `--blue-50`/`--blue-100`; azul de interação deriva de `--blue-500`/`--blue-700`.
+- Imagens e ativos: fotografia, Kommo, FIAP e chevrons existentes foram preservados; nenhuma aproximação gráfica ou imagem nova foi introduzida.
+- Copy: título, seis perguntas e todas as respostas permanecem idênticos.
+- Interações: abertura e fechamento usam 440 ms com `cubic-bezier(0.22, 1, 0.36, 1)`; hover, foco e estado aberto compartilham a mesma linguagem de borda, sombra e azul.
+
+## Validação funcional e responsiva
+
+- Seis itens encontrados e todos iniciam fechados.
+- Abertura e fechamento do primeiro item foram executados até o estado final.
+- Fallback sem animação preservado para `prefers-reduced-motion`.
+- Nenhum overflow horizontal em 1684 px ou 390 px.
+- Nenhum erro ou aviso no console.
+- A captura móvel confirma cards de 343 px, quebra de texto íntegra e continuidade da faixa azul.
+- O ponteiro em segundo plano não forçou `:hover` de forma confiável; o estado foi verificado pelas regras aplicadas e pelo equivalente de foco visível.
+
+Não restam diferenças P0, P1 ou P2. O gap de captura do hover é apenas uma limitação de evidência P3, não de implementação.
+
+final result: passed
+
+---
+
+# Design QA — revisão da transição Sobre mim → Dúvidas comuns
+
+## Ajustes solicitados
+
+- A faixa de credenciais e citação voltou ao desenho original: fundo sólido `#eef5ff`, sem borda, sombra ou sobreposição.
+- Os cantos externos superiores do FAQ foram removidos; o raio computado da seção é `0px`.
+- A passagem entre as seções agora é feita apenas por um degradê vertical de branco para azul-claro.
+- A distância entre a faixa de credenciais e o título “Dúvidas comuns” aumentou sem fundir os dois componentes.
+
+## Evidências e métricas
+
+- Referência anotada: `qa\about-faq-continuity\reference-revision.png`.
+- Implementação desktop: `qa\about-faq-continuity\revision-closed.png`.
+- Implementação mobile: `qa\about-faq-continuity\revision-mobile.png`.
+- Comparação lado a lado: `qa\about-faq-continuity\comparison-revision.png`.
+- Desktop: 179 px entre o fim da faixa e o início do título; `padding-top` do FAQ de 136 px.
+- Mobile: 121 px entre o fim da faixa e o início do título; `padding-top` do FAQ de 96 px.
+- A faixa original terminou com fundo `rgb(238, 245, 255)`, borda superior de 0 px, sombra `none` e raio `0 0 32px 32px`.
+- Nenhum overflow horizontal foi encontrado em 1700 × 1030 px ou 390 × 844 px.
+
+## Validação funcional
+
+- Abertura do primeiro item terminou com aproximadamente 171 px de altura, opacidade 1 e `open=true`.
+- Fechamento terminou com 0 px, opacidade 0 e `open=false`.
+- Nenhum estado de animação permaneceu preso após 520 ms.
+- `node --check script.js` e `git diff --check` passaram sem erros.
+
+Não restam diferenças P0, P1 ou P2 em relação à revisão solicitada.
+
+final result: passed
+
+---
+
+# Design QA — azul contínuo até o final do FAQ
+
+## Evidências
+
+- Fonte visual: `qa\about-faq-continuity\reference-revision.png`.
+- Implementação no início do FAQ: `qa\about-faq-continuity\revision-blue-through-end-top.png`.
+- Implementação no final do FAQ: `qa\about-faq-continuity\revision-blue-through-end-bottom.png`.
+- Comparação completa: `qa\about-faq-continuity\comparison-blue-through-end.png`.
+- Viewport: 1700 × 1030 CSS px, DPR 1.
+- Estado: FAQ fechado, página estabilizada após a animação de entrada.
+
+## Verificação visual
+
+- Tipografia, copy, ativos, espaçamento e componentes permaneceram inalterados.
+- O degradê agora progride de branco para `#edf6ff` e termina em `#eaf4ff`.
+- A captura focada no final confirma que o azul permanece atrás do último card e alcança o limite com a seção escura seguinte.
+- O raio externo do FAQ continua em `0px`, sem reintroduzir as curvas removidas.
+- Não há overflow horizontal nem erros ou avisos no console.
+
+Não foram encontradas diferenças P0, P1 ou P2 em relação ao ajuste solicitado.
+
+final result: passed

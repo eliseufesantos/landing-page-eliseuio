@@ -227,6 +227,72 @@
     onScroll();
   }
 
+  function setupFaq() {
+    var items = Array.prototype.slice.call(document.querySelectorAll(".faq-list details"));
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    items.forEach(function (item) {
+      var summary = item.querySelector("summary");
+      var shell = item.querySelector(".faq-answer-shell");
+      if (!summary || !shell) return;
+
+      shell.style.height = item.open ? "auto" : "0px";
+      shell.style.opacity = item.open ? "1" : "0";
+
+      summary.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (item.classList.contains("is-animating")) return;
+
+        var willOpen = !item.open;
+
+        if (reduceMotion.matches) {
+          item.open = willOpen;
+          shell.style.height = willOpen ? "auto" : "0px";
+          shell.style.opacity = willOpen ? "1" : "0";
+          return;
+        }
+
+        item.classList.add("is-animating");
+        item.classList.toggle("is-closing", !willOpen);
+
+        var finish = function (transitionEvent) {
+          if (transitionEvent.target !== shell || transitionEvent.propertyName !== "height") return;
+          shell.removeEventListener("transitionend", finish);
+
+          if (willOpen) {
+            shell.style.height = "auto";
+          } else {
+            item.open = false;
+            shell.style.height = "0px";
+          }
+
+          item.classList.remove("is-animating", "is-closing");
+        };
+
+        shell.addEventListener("transitionend", finish);
+
+        if (willOpen) {
+          item.open = true;
+          shell.style.height = "0px";
+          shell.style.opacity = "0";
+          void shell.offsetHeight;
+          window.requestAnimationFrame(function () {
+            shell.style.height = shell.scrollHeight + "px";
+            shell.style.opacity = "1";
+          });
+        } else {
+          shell.style.height = shell.scrollHeight + "px";
+          shell.style.opacity = "1";
+          void shell.offsetHeight;
+          window.requestAnimationFrame(function () {
+            shell.style.height = "0px";
+            shell.style.opacity = "0";
+          });
+        }
+      });
+    });
+  }
+
   function setupReveals() {
     var els = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
     var pipeline = document.getElementById("pipeline");
@@ -261,6 +327,7 @@
     renderCase();
     setupCarousel();
     setupHeader();
+    setupFaq();
     setupReveals();
   }
 

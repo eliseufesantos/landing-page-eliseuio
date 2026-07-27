@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparação — revisão da transição</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px;
+      background: #11161d;
+      color: #f7f9fc;
+      font: 700 14px/1.4 Arial, sans-serif;
+    }
+    main {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      max-width: 1700px;
+      margin: 0 auto;
+    }
+    figure {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid #303a48;
+      border-radius: 12px;
+      background: #1a222d;
+    }
+    figcaption { padding: 12px 14px; }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <figure>
+      <figcaption>Referência anotada</figcaption>
+      <img src="reference-revision.png" alt="Referência com anotações">
+    </figure>
+    <figure>
+      <figcaption>Implementação revisada</figcaption>
+      <img src="revision-blue-through-end-top.png" alt="Implementação sem curvas externas, com maior espaçamento e azul contínuo">
+    </figure>
+  </main>
+</body>
+</html>
