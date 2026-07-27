@@ -8,6 +8,18 @@
 
   var cases = [
     {
+      title: "Estúdios Lumini & Aura + Cor e Amor",
+      segment: "agendamento · CRM · operação",
+      stack: ["site de agendamento", "reservas e pagamentos", "WhatsApp", "CRM", "calendário"],
+      summary: "Dois negócios compartilhavam clientes, atendimento e parte dos processos. O desafio era organizar jornadas diferentes sem multiplicar o trabalho da equipe.",
+      chaos: "A locação dos estúdios e a venda de álbuns premium dependiam de jornadas diferentes, mas dividiam clientes, atendimento e dados. Sem um sistema comum, cada nova etapa aumentava o esforço da equipe.",
+      system: "Construí um site próprio de agendamento com reservas e pagamentos integrados, automações de confirmação, triagem pelo WhatsApp e um CRM para clientes, leads, reservas, pagamentos e pedidos.",
+      result: "O site e os fluxos de reserva e pagamento entraram em produção para atender ao volume real. A experiência visual foi elogiada pelo cliente e rapidamente adotada pela equipe.",
+      metric: null,
+      shot: "assets/case-shots/estudio-case.jpeg",
+      cta: "Ver arquitetura e processo"
+    },
+    {
       title: "FIAP",
       segment: "educação · IA aplicada",
       stack: ["Python", "LangGraph", "agentes IA", "ClickUp"],
@@ -16,18 +28,8 @@
       system: "Construí o \"Diagramador com IA\" usando arquitetura de agentes para automatizar a edição, a estruturação visual e a geração de ativos, transformando o fluxo numa esteira ágil.",
       result: "De 6 meses para 7 dias: cerca de 96% menos tempo de produção, conectando o criador de conteúdo direto ao resultado final.",
       metric: { value: "−96%", label: "tempo de produção · de 6 meses para 7 dias" },
-      shot: "assets/case-shots/fiap-case.jpeg"
-    },
-    {
-      title: "Lumini & Aura Studios",
-      segment: "estúdio fotográfico",
-      stack: ["CRM", "Mini-ERP", "agendamento", "VPS própria"],
-      summary: "Infraestrutura proprietária completa para a gestão de um estúdio fotográfico, substituindo ferramentas fragmentadas por um ecossistema unificado em ambiente próprio.",
-      chaos: "Captação, atendimento, agendamento e entrega viviam em ferramentas separadas. Cada handoff era um ponto de perda, sem histórico que acompanhasse o cliente.",
-      system: "Centralizei a operação num sistema só, com CRM, Mini-ERP e agendamento personalizado, hospedado em VPS própria (n8n, Typebot, Chatwoot) para garantir soberania dos dados.",
-      result: "Uma operação unificada, com os dados sob controle e cada etapa do atendimento rastreável de ponta a ponta.",
-      metric: null,
-      shot: "assets/case-shots/estudio-case.jpeg"
+      shot: "assets/case-shots/fiap-case.jpeg",
+      cta: "Ver detalhes do projeto"
     },
     {
       title: "Eucalyptus Solutions",
@@ -38,7 +40,8 @@
       system: "Estruturei processos digitais escaláveis com automação, gestão de ativos digitais e um CRM interno em Notion, entregando eficiência via ecossistemas automatizados.",
       result: "Tarefas repetitivas viraram fluxo confiável, com mais previsibilidade e eficiência operacional no dia a dia.",
       metric: null,
-      shot: "assets/case-shots/eucalyptus-case.jpeg"
+      shot: "assets/case-shots/eucalyptus-case.jpeg",
+      cta: "Ver detalhes do projeto"
     }
   ];
 
@@ -83,14 +86,14 @@
         "</div>" +
         '<div class="case-expand"><div>' +
           '<div class="case-steps">' +
-            '<div class="case-step s1"><span>// o cenário anterior · o caos</span><p>' + esc(item.chaos) + "</p></div>" +
-            '<div class="case-step s2"><span>// a engenharia aplicada · o sistema</span><p>' + esc(item.system) + "</p></div>" +
-            '<div class="case-step s3"><span>// o resultado · a ordem</span><p>' + esc(item.result) + "</p></div>" +
+            '<div class="case-step s1"><span>// o cenário anterior</span><p>' + esc(item.chaos) + "</p></div>" +
+            '<div class="case-step s2"><span>// a solução implementada</span><p>' + esc(item.system) + "</p></div>" +
+            '<div class="case-step s3"><span>// o resultado</span><p>' + esc(item.result) + "</p></div>" +
           "</div>" +
         "</div></div>" +
         '<div class="case-actions">' +
           '<button class="btn btn-expand" id="expandBtn" type="button">' +
-            '<span class="expand-label">Ver detalhes</span>' +
+            '<span class="expand-label">' + esc(item.cta || "Ver detalhes") + "</span>" +
             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>' +
           "</button>" +
           '<a class="btn btn-wa" href="https://wa.me/+5511911652102" target="_blank" rel="noopener">' +
@@ -124,7 +127,7 @@
     if (!card) return;
     card.classList.toggle("open");
     var label = card.querySelector(".expand-label");
-    if (label) label.textContent = card.classList.contains("open") ? "Ocultar detalhes" : "Ver detalhes";
+    if (label) label.textContent = card.classList.contains("open") ? "Ocultar detalhes" : (cases[activeCase].cta || "Ver detalhes");
   }
 
   function setupCarousel() {
