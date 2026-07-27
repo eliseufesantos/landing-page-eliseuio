@@ -511,3 +511,44 @@ final result: passed
 Não foram encontradas diferenças P0, P1 ou P2 em relação ao ajuste solicitado.
 
 final result: passed
+
+---
+
+# Design QA — ajuste de respiro da seção Sobre
+
+## Fonte visual e estado
+
+- Fonte visual: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-da6a1684-42b8-4c53-a1fa-f65e9fd85f92.png`, 1536 × 1024 px.
+- Implementação desktop: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-spacing-adjustment\about-spacing-desktop-1440.png`, 1425 × 900 px úteis.
+- Implementação mobile: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-spacing-adjustment\about-spacing-mobile-390.png`, 375 × 844 px úteis.
+- Viewports: desktop 1440 × 900 CSS px e mobile 390 × 844 CSS px, DPR 1.
+- Estado: seção Sobre em repouso, imediatamente após a borda curva de Cases.
+
+## Evidências de comparação
+
+- Comparação combinada, referência à esquerda e implementação à direita: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-spacing-adjustment\about-spacing-reference-vs-implementation.png`.
+- O recorte desktop funciona como comparação focada da transição Cases → Sobre; não foi necessário outro recorte porque o único atributo alterado foi o espaçamento superior.
+
+## Histórico da correção
+
+- P2 — No desktop, os 70 px máximos de padding superior deixavam o conteúdo visualmente próximo demais da borda curva de Cases.
+- Correção — O padding superior desktop passou para `clamp(88px, 6vw, 96px)`, adicionando respiro sem alterar a estrutura, a escala da imagem ou a faixa de credenciais.
+- Evidência pós-correção — O navegador calculou 88 px em 1440 px de largura; o marcador `</>` inicia 96 px abaixo do começo da seção.
+- Mobile preservado — A regra do breakpoint continua calculando 52 px em 390 px, sem overflow horizontal.
+
+## Superfícies de fidelidade
+
+- Tipografia, cores, imagens, logos e copy não foram alterados.
+- O ritmo vertical desktop ficou mais confortável e continua coerente com a borda curva da seção anterior.
+- O layout mobile permanece visualmente idêntico ao estado aprovado.
+
+## Validação funcional
+
+- URL e título da página conferidos; conteúdo da seção Sobre presente no DOM.
+- Nenhum overlay de framework, erro ou aviso relevante no console.
+- Seis itens do FAQ encontrados; o primeiro abriu corretamente após clique.
+- Nenhum overflow horizontal em 1440 ou 390 px.
+
+Não restam diferenças P0, P1 ou P2 relacionadas a este ajuste.
+
+final result: passed
