@@ -1183,13 +1183,13 @@ main section[id] {
   object-fit: contain;
 }
 .about-proof-logo--kommo {
-  justify-content: start;
+  justify-content: center;
   border: 0;
 }
 .about-proof-logo--kommo img {
   width: auto;
   max-width: none;
-  height: 76px;
+  height: 68px;
 }
 .about-proof-item h3 {
   color: var(--text-strong);
@@ -1205,6 +1205,7 @@ main section[id] {
 }
 .about-quote {
   grid-template-columns: 64px minmax(0, 1fr);
+  padding-left: 20px;
   font-style: normal;
 }
 .about-quote-mark {
@@ -1246,7 +1247,7 @@ main section[id] {
 .faq-intro h2 {
   text-align: center;
   color: var(--text-heading);
-  font-size: clamp(44px, 5vw, 62px);
+  font-size: clamp(40px, 3.5vw, 52px);
   font-weight: 900;
   letter-spacing: -0.035em;
 }
@@ -1701,7 +1702,10 @@ main section[id] {
     height: 62px;
   }
   .about-proof-logo--kommo img { width: auto; height: 62px; }
-  .about-quote { grid-template-columns: 50px minmax(0, 1fr); }
+  .about-quote {
+    grid-template-columns: 50px minmax(0, 1fr);
+    padding-left: 0;
+  }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1877,7 +1881,10 @@ main section[id] {
   .about-proof-item h3 { font-size: 16px; }
   .about-proof-item p,
   .about-quote cite { font-size: 13.5px; }
-  .about-quote { grid-template-columns: 58px minmax(0, 1fr); }
+  .about-quote {
+    grid-template-columns: 58px minmax(0, 1fr);
+    padding-left: 0;
+  }
   .about-quote p { font-size: 16px; }
   .about-quote-mark { font-size: 56px; }
   .faq-layout { gap: 34px; }

@@ -309,3 +309,81 @@ Evidência pós-correção: `qa\about\comparison-about.png`.
 ## Resultado
 
 final result: passed
+
+---
+
+# Design QA — seção Sobre, faixa editorial aberta
+
+## Fonte visual e estado
+
+- Fonte visual verdadeira: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-da6a1684-42b8-4c53-a1fa-f65e9fd85f92.png`
+- Fonte: 1536 × 1024 px.
+- Implementação desktop: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-implementation\about-desktop-1536x1024.png`
+- Implementação mobile superior: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-implementation\about-mobile-390x844.png`
+- Implementação mobile, credenciais e transição: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-implementation\about-mobile-proof-390x844.png`
+- Evidência final do símbolo Kommo e do FAQ: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-implementation\about-proof-desktop-final.png`
+- Viewport desktop: 1536 × 1024 CSS px, DPR 1; 1521 px úteis devido à barra de rolagem.
+- Viewport mobile: 390 × 844 CSS px, DPR 1.
+- Estado: seção Sobre em repouso; FAQ fechado na comparação visual.
+
+## Evidências de comparação
+
+- Comparação completa combinada: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-implementation\about-reference-vs-implementation.png`
+- Comparação focada e normalizada da área Sobre: `C:\Users\Eliseu Santos\.codex\visualizations\2026\07\27\019fa52a-6db6-78e1-a187-ee1b40b44d8e\about-implementation\about-focused-reference-vs-implementation.png`
+
+A comparação completa preserva 1536 × 1024 px nos dois lados. A comparação focada usa recortes de 1536 × 730 px, removendo apenas a diferença de rolagem e o shell persistente do header para alinhar retrato, narrativa e credenciais na mesma posição visual.
+
+## Histórico de comparação e correções
+
+### Primeira passagem
+
+- P2 — A faixa de credenciais estava aproximadamente 55 px mais estreita que o mock.
+- P2 — O retrato permanecia cerca de 75 px à esquerda do alvo e a narrativa cerca de 29 px à direita.
+- P2 — O texto corrido ocupava largura excessiva e reduzia as quebras previstas na referência.
+
+Correções:
+
+- O contêiner passou a ocupar a largura da seção, mantendo 62 px de margem lateral no desktop.
+- A grade principal passou para `0.78fr / 1fr`, com intervalo máximo de 60 px.
+- O bloco de perfil recebeu compensação interna responsiva; a narrativa passou a 48 `ch`.
+- A faixa azul-clara passou a 1398 × 192 px úteis no navegador, compatível com a referência considerando a barra de rolagem.
+
+### Refinamento final
+
+- P2 — O badge completo da Kommo deixava uma barra residual ao ser recortado como símbolo.
+- P2 — O título do FAQ estava maior que o alvo e competia com a seção Sobre.
+
+Correções:
+
+- O símbolo oficial da Kommo foi isolado do ativo existente em `assets/kommo-mark.png`, com transparência limpa e sem redesenho aproximado.
+- O título “Dúvidas comuns” passou a no máximo 52 px no desktop e mantém 40 px no mobile.
+- A citação recebeu compensação horizontal apenas no desktop; o ajuste é removido nos breakpoints de tablet e mobile.
+
+Evidências pós-correção: comparação focada e captura final das credenciais listadas acima.
+
+## Superfícies de fidelidade
+
+- Tipografia: Satoshi, pesos 850/900, quebras, line-height e largura de leitura reproduzem a hierarquia do mock.
+- Espaçamento e layout: a transição curva permanece na borda da seção escura; a seção Sobre é aberta, sem card ou divisórias; retrato, narrativa e faixa de credenciais seguem a mesma grade da referência.
+- Cores e tokens: fundo branco, faixa `#eef5ff`, FAQ `#f5f7fa`, texto carvão e azul de destaque preservam a identidade atual.
+- Imagens e ativos: fotografia original preservada em recorte circular; FIAP original; símbolo Kommo derivado do ativo oficial já presente, sem halo ou faixa residual.
+- Copy: nome, cargo, título, dois parágrafos, descrições das credenciais e citação correspondem ao mock aprovado.
+- Responsividade: tablet empilha perfil e narrativa e organiza as credenciais em duas colunas; mobile usa uma coluna contínua, sem linhas divisórias e sem overflow.
+
+## Validação funcional
+
+- Página identificada como `eliseu.io — Sistemas digitais sob medida` em `http://127.0.0.1:4173/#sobre`.
+- Conteúdo principal e seção Sobre presentes no snapshot do DOM; nenhum overlay de framework.
+- Nenhum erro ou aviso relevante no console em desktop ou mobile.
+- O primeiro item do FAQ foi acionado: atributo `open` passou de ausente para presente e a resposta ficou disponível.
+- Seis itens de FAQ foram encontrados; a seção Sobre não adiciona controles artificiais.
+- `git diff --check` passou sem erros.
+
+## Diferenças intencionais
+
+- O header translúcido persistente e o botão flutuante do WhatsApp pertencem ao shell real do site e não aparecem no mock gerado.
+- O símbolo Kommo usa o ativo oficial isolado, em vez da aproximação gráfica produzida pelo gerador do mock.
+
+Não restam diferenças P0, P1 ou P2 na seção implementada. A comparação focada confirma alinhamento, escala, ritmo vertical, cores, imagem, copy e credenciais.
+
+final result: passed
