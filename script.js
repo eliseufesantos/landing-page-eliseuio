@@ -5,16 +5,22 @@
   "use strict";
 
   var activeCase = 0;
+  var caseOpen = false;
 
   var cases = [
     {
       title: "Estúdios Lumini & Aura + Cor e Amor",
       segment: "agendamento · CRM · operação",
       stack: ["site de agendamento", "reservas e pagamentos", "WhatsApp", "CRM", "calendário"],
+      shortTitle: "Estúdios",
+      flow: ["Site de agendamento", "Reservas e pagamentos", "WhatsApp", "CRM + calendário"],
       summary: "Dois negócios compartilhavam clientes, atendimento e parte dos processos. O desafio era organizar jornadas diferentes sem multiplicar o trabalho da equipe.",
+      summaryShort: "Dois negócios compartilhavam clientes, atendimento e parte dos processos.",
       chaos: "A locação dos estúdios e a venda de álbuns premium dependiam de jornadas diferentes, mas dividiam clientes, atendimento e dados. Sem um sistema comum, cada nova etapa aumentava o esforço da equipe.",
+      chaosShort: "A locação dos estúdios e a venda de álbuns premium dependiam de jornadas diferentes, mas dividiam clientes, atendimento e dados.",
       system: "Construí um site próprio de agendamento com reservas e pagamentos integrados, automações de confirmação, triagem pelo WhatsApp e um CRM para clientes, leads, reservas, pagamentos e pedidos.",
       result: "O site e os fluxos de reserva e pagamento entraram em produção para atender ao volume real. A experiência visual foi elogiada pelo cliente e rapidamente adotada pela equipe.",
+      resultShort: "Reservas, pagamentos e atendimento passaram a operar em um fluxo integrado, adotado pela equipe.",
       metric: null,
       shot: "assets/case-shots/estudio-case.jpeg",
       cta: "Ver arquitetura e processo"
@@ -23,6 +29,8 @@
       title: "FIAP",
       segment: "educação · IA aplicada",
       stack: ["Python", "LangGraph", "agentes IA", "ClickUp"],
+      shortTitle: "FIAP",
+      flow: ["Professor", "Diagramador com IA", "edição · estrutura visual · ativos", "plataforma final"],
       summary: "Reengenharia completa do fluxo de produção de conteúdo educacional com o \"Diagramador com IA\", uma ferramenta que conecta o professor direto à plataforma final.",
       chaos: "A criação de um curso passava por conteudistas, revisão, estúdio e dev. A fragmentação gerava retrabalho, perda de contexto e custos invisíveis. Cada entrega levava de 90 a 180 dias.",
       system: "Construí o \"Diagramador com IA\" usando arquitetura de agentes para automatizar a edição, a estruturação visual e a geração de ativos, transformando o fluxo numa esteira ágil.",
@@ -35,6 +43,8 @@
       title: "Eucalyptus Solutions",
       segment: "automação · ativos digitais",
       stack: ["automação", "bots", "Notion CRM", "SwaS"],
+      shortTitle: "Eucalyptus",
+      flow: ["Mapeamento", "Automações e bots", "Notion CRM", "Operação SwaS"],
       summary: "Venture de criação e comercialização de \"propriedades digitais\" (fluxos de automação e bots), caminhando para um modelo SwaS (Software with a Service).",
       chaos: "Processos manuais e gargalos recorrentes consumiam tempo e abriam espaço para erro em tarefas que se repetiam todo dia.",
       system: "Estruturei processos digitais escaláveis com automação, gestão de ativos digitais e um CRM interno em Notion, entregando eficiência via ecossistemas automatizados.",
@@ -54,7 +64,7 @@
     if (!chips) return;
     chips.innerHTML = cases
       .map(function (c, i) {
-        return '<button type="button" class="case-chip ' + (i === activeCase ? "active" : "") + '" data-case="' + i + '">' + esc(c.title) + "</button>";
+        return '<button type="button" class="case-chip ' + (i === activeCase ? "active" : "") + '" data-case="' + i + '" aria-pressed="' + (i === activeCase) + '">' + esc(c.shortTitle) + "</button>";
       })
       .join("");
   }
@@ -62,88 +72,70 @@
   function renderCase() {
     var item = cases[activeCase];
     var card = document.getElementById("caseCard");
+    var stage = document.getElementById("caseStage");
+    var architecture = document.getElementById("caseArchitecture");
     var counter = document.getElementById("caseCounter");
-    var dots = document.getElementById("caseDots");
-    if (!card) return;
+    if (!card || !stage || !architecture) return;
 
     if (counter) counter.textContent = (activeCase + 1) + " / " + cases.length;
 
-    card.classList.remove("open");
+    stage.classList.toggle("open", caseOpen);
     card.innerHTML =
-      '<div class="case-media">' +
-        '<span class="media-tag">// ' + esc(item.segment) + "</span>" +
+      '<div class="case-visual">' +
         '<img src="' + item.shot + '" alt="Imagem do case ' + esc(item.title) + '" />' +
       "</div>" +
-      '<div class="case-detail">' +
-        '<span class="seg">case ' + (activeCase + 1) + " de " + cases.length + "</span>" +
+      '<article class="case-info">' +
+        '<span class="case-segment">' + esc(item.segment) + "</span>" +
         "<h3>" + esc(item.title) + "</h3>" +
-        '<p class="summary">' + esc(item.summary) + "</p>" +
+        '<p class="summary">' + esc(item.summaryShort || item.summary) + "</p>" +
         (item.metric
           ? '<div class="case-metric"><span class="case-metric-value">' + esc(item.metric.value) + '</span><span class="case-metric-label">' + esc(item.metric.label) + "</span></div>"
           : "") +
-        '<div class="case-stack">' +
-          item.stack.map(function (s) { return "<span>" + esc(s) + "</span>"; }).join("") +
-        "</div>" +
-        '<div class="case-expand"><div>' +
-          '<div class="case-steps">' +
-            '<div class="case-step s1"><span>// o cenário anterior</span><p>' + esc(item.chaos) + "</p></div>" +
-            '<div class="case-step s2"><span>// a solução implementada</span><p>' + esc(item.system) + "</p></div>" +
-            '<div class="case-step s3"><span>// o resultado</span><p>' + esc(item.result) + "</p></div>" +
-          "</div>" +
-        "</div></div>" +
-        '<div class="case-actions">' +
-          '<button class="btn btn-expand" id="expandBtn" type="button">' +
-            '<span class="expand-label">' + esc(item.cta || "Ver detalhes") + "</span>" +
+        '<button class="case-expand-trigger" id="expandBtn" type="button" aria-expanded="' + caseOpen + '" aria-controls="caseArchitecture">' +
+            '<span class="expand-label">' + (caseOpen ? "Ocultar arquitetura e processo" : "Ver arquitetura e processo") + "</span>" +
             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>' +
           "</button>" +
-          '<a class="btn btn-wa" href="https://wa.me/5511916192015" target="_blank" rel="noopener">' +
-            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>' +
-            "Quero um sistema assim" +
-          "</a>" +
+      "</article>";
+
+    architecture.innerHTML =
+      '<div class="case-architecture-inner">' +
+        '<h4>Arquitetura e processo</h4>' +
+        '<div class="case-architecture-grid">' +
+          '<section class="architecture-copy architecture-before"><span>O cenário anterior</span><p>' + esc(item.chaosShort || item.chaos) + "</p></section>" +
+          '<section class="architecture-solution"><span>A solução implementada</span><div class="architecture-flow">' +
+            item.flow.map(function (step) { return '<span class="architecture-node">' + esc(step) + "</span>"; }).join('<span class="architecture-line" aria-hidden="true"></span>') +
+          "</div></section>" +
+          '<section class="architecture-copy architecture-result"><span>O resultado</span><p>' + esc(item.resultShort || item.result) + "</p></section>" +
         "</div>" +
       "</div>";
-
-    if (dots) {
-      dots.innerHTML = cases
-        .map(function (_, i) {
-          return '<button type="button" aria-label="Ir para case ' + (i + 1) + '" class="' + (i === activeCase ? "active" : "") + '" data-case="' + i + '"></button>';
-        })
-        .join("");
-    }
 
     var chipBtns = document.querySelectorAll("#caseChips .case-chip");
     Array.prototype.forEach.call(chipBtns, function (b, i) {
       b.classList.toggle("active", i === activeCase);
+      b.setAttribute("aria-pressed", String(i === activeCase));
     });
   }
 
   function setCase(index) {
     activeCase = ((index % cases.length) + cases.length) % cases.length;
+    caseOpen = false;
     renderCase();
   }
 
   function toggleExpand() {
-    var card = document.getElementById("caseCard");
-    if (!card) return;
-    card.classList.toggle("open");
-    var label = card.querySelector(".expand-label");
-    if (label) label.textContent = card.classList.contains("open") ? "Ocultar detalhes" : (cases[activeCase].cta || "Ver detalhes");
+    caseOpen = !caseOpen;
+    renderCase();
   }
 
   function setupCarousel() {
     var prev = document.getElementById("prevCase");
     var next = document.getElementById("nextCase");
-    var dots = document.getElementById("caseDots");
     var chips = document.getElementById("caseChips");
     var card = document.getElementById("caseCard");
 
     if (prev) prev.addEventListener("click", function () { setCase(activeCase - 1); });
     if (next) next.addEventListener("click", function () { setCase(activeCase + 1); });
 
-    if (dots) dots.addEventListener("click", function (e) {
-      var b = e.target.closest("button[data-case]");
-      if (b) setCase(Number(b.dataset.case));
-    });
     if (chips) chips.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-case]");
       if (b) setCase(Number(b.dataset.case));
@@ -322,7 +314,18 @@
     setTimeout(check, 450);
   }
 
+  function setupIcons() {
+    if (!window.lucide || typeof window.lucide.createIcons !== "function") return;
+    window.lucide.createIcons({
+      attrs: {
+        "aria-hidden": "true",
+        "stroke-width": 1.8
+      }
+    });
+  }
+
   function init() {
+    setupIcons();
     renderChips();
     renderCase();
     setupCarousel();
