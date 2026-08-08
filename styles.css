@@ -564,102 +564,102 @@ main section[id] {
    PROBLEMA (dark)
    ============================================================ */
 .problem-section {
-  background:
-    radial-gradient(700px 360px at 80% 10%, rgba(207, 34, 46, 0.10), transparent 70%),
-    linear-gradient(180deg, #1b2027, #14181d);
+  --problem-accent: #ff5c57;
+  --problem-bleed: clamp(28px, 3.5vw, 52px);
+  padding: clamp(92px, 8.5vw, 132px) 0 clamp(62px, 6.5vw, 96px);
+  background: #161b21;
 }
-.problem-section .eyebrow { color: #ff7b72; }
-.problem-section .section-head h2 { color: var(--text-on-inverse); }
-.problem-section .section-head p { color: rgba(230, 237, 243, 0.62); }
-.problem-intro { display: grid; gap: 14px; margin-top: 22px; }
-.section-head .problem-intro p { margin-top: 0; font-size: 17px; line-height: 1.62; }
-
-.chaos-board {
-  position: relative;
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px; margin-top: 56px;
+.problem-container {
+  max-width: 1440px;
+  padding-right: clamp(32px, 5.2vw, 80px);
+  padding-left: clamp(32px, 5.2vw, 80px);
 }
-.chaos-card {
-  --problem-border: rgba(255, 255, 255, 0.10);
-  --problem-border-hover: rgba(255, 255, 255, 0.22);
-  --problem-glow: rgba(255, 255, 255, 0.04);
-  position: relative;
-  min-height: 214px; padding: 22px;
-  border: 1px solid var(--problem-border);
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.035);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22), inset 0 0 0 1px var(--problem-glow);
-  transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
-  will-change: transform;
+.problem-copy { max-width: 680px; }
+.problem-section .eyebrow {
+  color: rgba(230, 237, 243, 0.62);
+  font-size: clamp(13px, 1.08vw, 16px);
 }
-.chaos-card .card-kicker {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 4px 9px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-sm);
-  background: rgba(255,255,255,0.04);
-  color: rgba(230,237,243,0.6);
-  font-family: var(--font-mono); font-size: 12px;
+.problem-section .eyebrow span {
+  margin-right: 8px;
+  color: var(--problem-accent);
 }
-.chaos-card .card-kicker svg { width: 13px; height: 13px; }
-.chaos-card h3 { margin-top: 26px; color: var(--text-on-inverse); font-size: 22px; line-height: 1.18; }
-.chaos-card p { margin-top: 12px; color: rgba(230, 237, 243, 0.56); font-size: 15px; }
-.chaos-card.rot-a {
-  --problem-border: rgba(88, 166, 255, 0.34);
-  --problem-border-hover: rgba(88, 166, 255, 0.58);
-  --problem-glow: rgba(88, 166, 255, 0.04);
-  transform: rotate(-2deg) translateY(12px);
-  animation: floatA 8s ease-in-out infinite;
+.problem-copy h2 {
+  max-width: 9ch;
+  margin-top: 26px;
+  color: #f6f8fa;
+  font-size: clamp(56px, 6vw, 92px);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: initial;
 }
-.chaos-card.rot-b {
-  --problem-border: rgba(191, 135, 0, 0.34);
-  --problem-border-hover: rgba(191, 135, 0, 0.60);
-  --problem-glow: rgba(191, 135, 0, 0.05);
-  transform: rotate(1.4deg) translateY(-6px);
-  animation: floatB 9s ease-in-out infinite;
+.problem-lead {
+  max-width: 49ch;
+  margin-top: 34px;
+  color: rgba(230, 237, 243, 0.67);
+  font-size: clamp(17px, 1.42vw, 22px);
+  line-height: 1.55;
 }
-.chaos-card.rot-c {
-  --problem-border: rgba(163, 113, 247, 0.30);
-  --problem-border-hover: rgba(163, 113, 247, 0.56);
-  --problem-glow: rgba(163, 113, 247, 0.04);
-  transform: rotate(-1deg) translateY(20px);
-  animation: floatA 8.5s ease-in-out infinite 0.4s;
+.problem-flow {
+  margin: clamp(58px, 6vw, 86px) 0 0;
+  margin-right: calc(-1 * var(--problem-bleed));
+  margin-left: calc(-1 * var(--problem-bleed));
 }
-.chaos-card.rot-d {
-  --problem-border: rgba(207, 34, 46, 0.34);
-  --problem-border-hover: rgba(207, 34, 46, 0.60);
-  --problem-glow: rgba(207, 34, 46, 0.05);
-  transform: rotate(2.2deg) translateY(6px);
-  animation: floatB 7.5s ease-in-out infinite 0.6s;
+.problem-line {
+  display: block;
+  width: 100%;
 }
-.chaos-card:hover {
-  transform: rotate(0deg) translateY(-6px) scale(1.015);
-  border-color: var(--problem-border-hover);
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.34), inset 0 0 0 1px var(--problem-glow);
-  z-index: 2; animation-play-state: paused;
+.problem-line img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
-.chaos-card .tag-sheet {
-  border-color: rgba(88, 166, 255, 0.52);
-  background: rgba(88, 166, 255, 0.08);
-  color: #79c0ff;
+.problem-labels {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 20px;
 }
-.chaos-card .tag-warn { border-color: rgba(191,135,0,0.5); background: rgba(191,135,0,0.08); color: #e3b341; }
-.chaos-card .tag-calendar {
-  border-color: rgba(163, 113, 247, 0.50);
-  background: rgba(163, 113, 247, 0.08);
-  color: #d2a8ff;
+.problem-labels span {
+  min-width: 0;
+  padding: 0 clamp(16px, 2vw, 30px);
+  border-left: 1px solid rgba(230, 237, 243, 0.18);
+  color: rgba(230, 237, 243, 0.74);
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
 }
-.chaos-card .tag-danger { border-color: rgba(207,34,46,0.45); background: rgba(207,34,46,0.08); color: #ff7b72; }
+.problem-labels span:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.problem-labels span:last-child { padding-right: 0; }
 .problem-quote {
-  max-width: 760px;
-  margin: 64px 0 0 auto;
-  padding: 8px 0 8px 28px;
-  border-left: 2px solid #ff7b72;
-  color: rgba(230, 237, 243, 0.82);
-  font-size: clamp(20px, 2.4vw, 28px);
-  font-weight: 700;
-  line-height: 1.35;
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  max-width: none;
+  margin: clamp(52px, 5vw, 74px) 0 0;
+  margin-right: calc(-1 * var(--problem-bleed));
+  margin-left: calc(-1 * var(--problem-bleed));
+  padding: clamp(30px, 3vw, 42px) 8px 0;
+  border-top: 1px solid rgba(230, 237, 243, 0.16);
+  color: rgba(230, 237, 243, 0.76);
+  font-style: normal;
+}
+.problem-quote > span {
+  flex: 0 0 auto;
+  color: var(--problem-accent);
+  font-size: 24px;
+  line-height: 1;
+}
+.problem-quote p {
+  font-size: clamp(22px, 2.15vw, 34px);
+  font-weight: 650;
+  line-height: 1.32;
 }
 
 /* ============================================================
@@ -1727,7 +1727,8 @@ main section[id] {
   .case-card-v2 { grid-template-columns: 1fr; }
   .case-media { min-height: 260px; }
   .pipeline { grid-template-columns: minmax(0, 1fr) 190px; gap: 26px; }
-  .chaos-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .problem-copy { max-width: 620px; }
+  .problem-labels span { padding-right: 12px; padding-left: 12px; }
   .about-section {
     padding-top: 64px;
     padding-bottom: 46px;
@@ -1868,8 +1869,60 @@ main section[id] {
   .process-step h3 { margin-top: 20px; }
   .process-assurance { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
   .process-assurance p { font-size: 18px; }
-  .chaos-board { grid-template-columns: 1fr; }
-  .chaos-card, .chaos-card.rot-a, .chaos-card.rot-b, .chaos-card.rot-c, .chaos-card.rot-d { transform: none; animation: none; }
+  .problem-section {
+    padding-top: 78px;
+    padding-bottom: 64px;
+  }
+  .problem-container {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .problem-copy h2 {
+    margin-top: 20px;
+    font-size: clamp(48px, 14vw, 62px);
+  }
+  .problem-lead {
+    margin-top: 26px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .problem-flow {
+    overflow: hidden;
+    margin-top: 50px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .problem-line {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+  .problem-labels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 0;
+    margin-top: 18px;
+  }
+  .problem-labels span {
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+  .problem-labels span:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .problem-quote {
+    gap: 14px;
+    margin-top: 44px;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 26px;
+  }
+  .problem-quote p {
+    font-size: 21px;
+    line-height: 1.36;
+  }
   .cases-section .section-head p { display: none; }
   .case-shell { margin-top: 24px; }
   .case-toolbar {

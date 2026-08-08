@@ -57,7 +57,7 @@ Evidência pós-correção: `qa\hero-redesign\03-redesign-v2.png`
 ## Validação funcional e responsiva
 
 - Exatamente um CTA no hero.
-- Destino do CTA confirmado como `https://wa.me/+5511911652102`, abrindo em nova aba com `rel="noopener"`.
+- Destino do CTA confirmado como `https://wa.me/5511916192015`, abrindo em nova aba com `rel="noopener"`.
 - CTA acionado no navegador local; nenhuma mensagem foi enviada.
 - Favicon confirmado em `assets/favicon-terminal.png`.
 - Três linhas de entrada e uma saída animada verificadas.
@@ -67,6 +67,60 @@ Evidência pós-correção: `qa\hero-redesign\03-redesign-v2.png`
 - Regra de `prefers-reduced-motion` preservada.
 
 ## Resultado
+
+final result: passed
+
+---
+
+# Design QA — seção Problema minimalista
+
+## Fonte visual e estado
+
+- Fonte visual verdadeira: `C:\Users\Eliseu Santos\.codex\generated_images\019fe213-b315-7c23-871d-ac4b0c2d707d\exec-f374d900-e42b-4600-9b8d-427403bf0d32.png`.
+- Fonte: 1631 × 964 px.
+- Implementação desktop: `qa\problem\implementation-desktop.png`, 1521 × 1014 px úteis em viewport 1536 × 1024 CSS px, DPR 1.
+- Implementação mobile: `qa\problem\implementation-mobile.png`, 375 × 812 px úteis em viewport 390 × 844 CSS px, DPR 1.
+- Estado: seção Problema em repouso, conteúdo revelado; no desktop, o header persistente aparece sobre a seção como no site real.
+- Normalização: a comparação redimensiona proporcionalmente os recortes da seção para células de 1120 × 680 px, sem distorção.
+
+## Evidência de comparação
+
+- Comparação combinada, referência à esquerda e implementação à direita: `qa\problem\comparison-reference-vs-implementation.png`.
+- O comparativo completo mantém headline, copy, linha, quatro rótulos, divisor e frase final legíveis; não foi necessário um recorte focado adicional.
+- O header e o botão flutuante pertencem ao shell real do site e não fazem parte da fidelidade julgada para esta seção.
+
+## Histórico de comparação e correções
+
+### Primeira implementação
+
+- P2 — A linha usava a mesma largura do bloco de copy e ficava mais recuada que no mock, reduzindo sua presença horizontal.
+- P2 — No mobile, o ativo desktop preservava toda a composição, mas o traço ficava fino demais em aproximadamente 330 px de largura.
+
+Correções:
+
+- A linha e a citação receberam sangria controlada de até 52 px no desktop, aproximando pontos inicial e final das margens do mock sem criar overflow.
+- Foi criado `assets/problem-tension-line-mobile.png`, com o mesmo percurso semiótico e traço mais espesso, selecionado por `<picture>` abaixo de 640 px.
+- Os dois ativos usam transparência real, sem fundo verde e sem substituir a ilustração por CSS ou SVG aproximado.
+
+Evidência pós-correção: `qa\problem\implementation-desktop.png`, `qa\problem\implementation-mobile.png` e `qa\problem\comparison-reference-vs-implementation.png`.
+
+## Superfícies de fidelidade
+
+- Tipografia: Satoshi e JetBrains Mono existentes foram preservadas; headline em peso 900, eyebrow e rótulos monoespaçados, com quebras equivalentes ao mock.
+- Espaçamento e layout: bloco superior, linha em largura ampla, grade de quatro rótulos, divisor e citação reproduzem a hierarquia e o ritmo do alvo; no mobile, os rótulos formam uma grade 2 × 2.
+- Cores e tokens: superfície sólida `#161b21`, branco/cinza frio e um único acento coral `#ff5c57`; os cards, tags multicoloridas, sombras e gradientes anteriores foram removidos.
+- Imagem e ativo: linha desktop em 1629 × 143 px RGBA e linha mobile em 1738 × 205 px RGBA, ambas nítidas, transparentes e com endpoints, nó central, ondas e trecho tracejado preservados.
+- Copy: headline, parágrafo, quatro rótulos e frase final correspondem ao mock aprovado e reduzem substancialmente o volume anterior.
+
+## Validação funcional e responsiva
+
+- A seção não contém controles próprios; a navegação, o menu e os CTAs existentes permaneceram fora do escopo e inalterados.
+- O navegador carregou corretamente o ativo desktop e selecionou `problem-tension-line-mobile.png` no breakpoint de 390 px.
+- Nenhum overflow horizontal em 1536 px ou 390 px.
+- Nenhuma imagem quebrada e nenhum erro ou aviso no console.
+- `node --check script.js` e `git diff --check` passaram.
+
+Não restam diferenças P0, P1 ou P2 na seção implementada. O contraste do traço foi reforçado no mobile sem alterar a direção aprovada.
 
 final result: passed
 
