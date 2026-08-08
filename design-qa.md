@@ -606,3 +606,54 @@ final result: passed
 Não restam diferenças P0, P1 ou P2 relacionadas a este ajuste.
 
 final result: passed
+
+---
+
+# Design QA — narrativa da seção Problema
+
+## Fonte visual e estado
+
+- Fonte visual: `C:\Users\Eliseu Santos\.codex\generated_images\019fe213-b315-7c23-871d-ac4b0c2d707d\exec-f374d900-e42b-4600-9b8d-427403bf0d32.png`, 1631 × 964 px.
+- Implementação desktop: `qa\problem\implementation-desktop.png`, 1521 × 1014 px úteis em viewport 1536 × 1024 CSS px, DPR 1.
+- Implementação mobile: `qa\problem\implementation-mobile.png`, 375 × 812 px úteis em viewport 390 × 844 CSS px, DPR 1.
+- Estado: seção revelada, sem interação própria; header e WhatsApp persistentes pertencem ao shell real.
+
+## Evidência de comparação
+
+- Comparação combinada: `qa\problem\comparison-copy-reference-vs-implementation.png`.
+- A referência permanece a fonte de layout, tipografia, linha e hierarquia. A copy diverge intencionalmente por solicitação do usuário.
+- O comparativo completo mantém todos os elementos legíveis; não foi necessário recorte focado adicional.
+
+## Histórico de comparação e correções
+
+- P2 — A primeira copy nomeava sintomas isolados, mas não deixava claro que eles surgiam dentro da operação do próprio cliente.
+- P2 — A primeira revisão desviou o foco para sistemas e conexão, alterando o teor aprovado e a promessa de simplificar operações.
+
+Correções:
+
+- O eyebrow, a headline e os quatro conceitos aprovados foram restaurados: complexidade acumulada, improviso, dados espalhados, processo manual, contexto perdido e cliente esperando.
+- O parágrafo agora conta uma história curta: conforme o negócio cresce, os sintomas se acumulam até a equipe sustentar a operação no improviso.
+- O fechamento conecta essa história à promessa da Eliseu.io: “Quando tudo depende de alguém lembrar do próximo passo, a operação fica mais difícil do que deveria.”
+- O `max-width` original de `9ch` foi restaurado e o CSS recebeu `?v=20260808-problem-story` para evitar cache antigo.
+
+Evidência pós-correção: `qa\problem\implementation-desktop.png`, `qa\problem\implementation-mobile.png` e `qa\problem\comparison-copy-reference-vs-implementation.png`.
+
+## Superfícies de fidelidade
+
+- Tipografia: famílias, pesos e escalas aprovados foram preservados; a headline original ocupa duas linhas no desktop e duas no mobile.
+- Espaçamento e layout: a nova narrativa mantém a composição do mock; a seção mede aproximadamente 1049 px no desktop e 849 px no mobile.
+- Cores e tokens: nenhum token cromático foi alterado.
+- Imagens e ativos: os ativos desktop e mobile da linha permanecem intactos, transparentes e nítidos.
+- Copy: eyebrow, headline, parágrafo, rótulos e conclusão formam uma história única sobre a complexidade que se acumula na operação do cliente.
+
+## Validação funcional e responsiva
+
+- Nenhum overflow horizontal em 1536 px ou 390 px.
+- O navegador selecionou corretamente `problem-tension-line-mobile.png` no breakpoint móvel.
+- Nenhuma imagem quebrada e nenhum erro ou aviso no console.
+- A seção não introduz controles; navegação e CTAs existentes não foram alterados.
+- `node --check script.js` e `git diff --check` passaram.
+
+Não restam diferenças P0, P1 ou P2 após a restauração do teor aprovado e a organização da narrativa operacional.
+
+final result: passed
