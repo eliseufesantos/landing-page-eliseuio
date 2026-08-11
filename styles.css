@@ -249,13 +249,15 @@ p { text-wrap: pretty; }
   -webkit-backdrop-filter: saturate(130%) blur(22px);
   backdrop-filter: saturate(130%) blur(22px);
   pointer-events: auto;
+  transform-origin: center top;
   transition: background var(--transition), border-color var(--transition), box-shadow var(--transition), transform var(--transition);
-  animation: headerEnter 0.58s var(--ease) both;
+  animation: headerEnter 0.58s var(--ease) backwards;
 }
 .site-header.scrolled .nav-shell {
   border-color: rgba(255, 255, 255, 0.78);
   background: rgba(205, 218, 234, 0.84);
   box-shadow: 0 12px 36px rgba(34, 68, 105, 0.16);
+  transform: scale(0.95);
 }
 .nav-main { display: contents; }
 .brand {
