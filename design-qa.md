@@ -43,6 +43,55 @@ final result: passed
 
 ---
 
+# Design QA — linha semiótica vertical da seção Problema
+
+## Fonte visual, estado e normalização
+
+- Fonte visual de linguagem: `qa/problem/source-reference-horizontal-mobile.png`, 427 × 852 px.
+- Ativo vertical aprovado para implementação: `assets/problem-tension-line-vertical-mobile.png`, 183 × 2046 px, PNG RGBA transparente.
+- Implementação mobile: `qa/problem/implementation-vertical-mobile-top.png` e `qa/problem/implementation-vertical-mobile-bottom-pass2.png`, 378 × 819 px, viewport de 393 × 852 CSS px, DPR 1.
+- Implementação desktop de regressão: `qa/problem/implementation-desktop-after-vertical-mobile.png`, 1425 × 990 px, viewport de 1440 × 1000 CSS px, DPR 1.
+- Estado: seção `#problema` revelada, navegação fixa real da landing ativa e ativo selecionado pelo elemento `picture` em cada breakpoint.
+- Normalização: a comparação combinada dimensiona a referência horizontal, o ativo vertical e a seção renderizada dentro de um mesmo quadro de 1200 × 1250 px. A diferença de altura é intencional, pois o objetivo desta iteração é transformar a narrativa horizontal em percurso vertical no mobile.
+
+## Evidências de comparação
+
+- Comparação full-view combinada: `qa/problem/comparison-vertical-mobile.png`.
+- Recorte focado superior: `qa/problem/implementation-vertical-mobile-top.png`, confirmando título, copy, ponto inicial e início do nó.
+- Recorte focado inferior: `qa/problem/implementation-vertical-mobile-bottom-pass2.png`, confirmando resolução do nó, linha tracejada, círculo final, quatro conceitos e citação.
+- O navegador confirmou que o mobile carrega `assets/problem-tension-line-vertical-mobile.png` e o desktop continua carregando `assets/problem-tension-line.png`.
+
+## Histórico das correções P0/P1/P2
+
+- P2 — Na primeira captura, o traço vertical perdia contraste após a redução e o aspecto intrínseco do PNG fazia o diagrama crescer para 760 px.
+- Correção — O alpha do PNG foi reforçado, a cor foi uniformizada em coral `#ff5148` e o diagrama mobile recebeu altura fixa de 520 px.
+- Evidência pós-correção — `implementation-vertical-mobile-top.png` e `implementation-vertical-mobile-bottom-pass2.png` mostram o traço legível, sem halo verde, com nó, ondas, tracejado e círculo final preservados.
+- P2 — A primeira composição mantinha os rótulos em uma grade 2 × 2 abaixo da linha, sem acompanhar a nova direção vertical.
+- Correção — Os quatro conceitos passaram a alternar à esquerda e à direita em quatro faixas alinhadas ao percurso central.
+- Evidência pós-correção — Os rótulos ocupam quatro linhas de 130 px no viewport testado, sem colisão ou truncamento.
+
+## Superfícies de fidelidade
+
+- Tipografia: Satoshi permanece na headline e na copy; os conceitos continuam monoespaçados, em caixa alta e com o mesmo tom técnico da referência.
+- Espaçamento e layout: o mobile usa três colunas simétricas, 68 px para o eixo central e 520 px de altura para a narrativa; o desktop permanece horizontal e inalterado.
+- Cores e tokens: fundo `rgb(22, 27, 33)` e coral `#ff5148` preservam a relação cromática da referência, sem introdução de novas cores.
+- Imagem e qualidade do ativo: PNG transparente real, sem fundo rasterizado da seção, sem halo verde perceptível e com 25 KB no recorte mobile.
+- Copy e conteúdo: nenhum texto foi rasterizado ou alterado; headline, parágrafo, quatro conceitos e citação permanecem HTML acessível e responsivo.
+
+## Validação final
+
+- Mobile: `scrollWidth` e `clientWidth` iguais a 378 px; sem overflow horizontal.
+- Desktop: `scrollWidth` e `clientWidth` iguais a 1425 px; a fonte horizontal original continua selecionada.
+- Console: nenhum erro ou aviso.
+- Interações: navegação por `#problema` e troca responsiva do `picture` verificadas; a ilustração em si é decorativa e não possui interação.
+- `node --check script.js` e `git diff --check` passaram.
+
+Não restam diferenças P0, P1 ou P2 acionáveis para a verticalização solicitada.
+
+final result: passed
+
+---
+
 # Design QA — reforço do CTA de arquitetura dos cases (versão substituída)
 
 Data: 2026-08-11
@@ -343,5 +392,13 @@ final result: blocked
 ## Gate atual — Processo “Clareza antes do código”
 
 O relatório “Design QA — Processo ‘Clareza antes do código’” acima é o registro autoritativo da implementação atual. A captura browser-rendered desktop/mobile, a comparação combinada, o teste de navegação e a verificação do console foram concluídos. O gate bloqueado anterior pertence exclusivamente a uma versão antiga da seção Solução e não se aplica a este redesign do Processo.
+
+final result: passed
+
+---
+
+## Gate atual — linha semiótica vertical da seção Problema
+
+O relatório “Design QA — linha semiótica vertical da seção Problema” acima é o registro autoritativo desta alteração. A referência, o ativo vertical, as capturas mobile e desktop, a comparação combinada, o overflow e o console foram verificados no navegador local.
 
 final result: passed
