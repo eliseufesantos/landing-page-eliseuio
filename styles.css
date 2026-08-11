@@ -91,7 +91,19 @@
   --radius-xl: 18px;
   --radius-pill: 999px;
 
-  --section-y: 130px;
+  /* Escala editorial compartilhada entre todas as seções */
+  --type-display: clamp(3.25rem, 4.7vw, 4.25rem);
+  --type-section-title: clamp(2.75rem, 4vw, 3.625rem);
+  --type-section-lead: clamp(1.0625rem, 1.25vw, 1.1875rem);
+  --type-eyebrow: 0.8125rem;
+  --leading-display: 1.02;
+  --leading-heading: 1.05;
+  --leading-copy: 1.6;
+  --space-title-from-eyebrow: 1rem;
+  --space-lead-from-title: 1.25rem;
+  --space-section-content: clamp(3rem, 4.5vw, 4rem);
+  --space-section-block: clamp(4.5rem, 6vw, 5.5rem);
+  --section-y: clamp(6.5rem, 8vw, 7.5rem);
   --container-wide: 1180px;
   --gutter: 24px;
   --ease: cubic-bezier(0.22, 0.68, 0.18, 1);
@@ -3108,4 +3120,98 @@ main section[id] {
   .process-assurance-icon svg { width: 22px; height: 22px; }
   .process-assurance-item p { font-size: 15px; }
   .process-assurance-item strong { font-size: 16px; }
+}
+
+/* ============================================================
+   RITMO EDITORIAL — tipografia e espaçamento globais
+   ============================================================ */
+
+.hero-copy h1 {
+  font-size: var(--type-display);
+  line-height: var(--leading-display);
+}
+
+.problem-copy h2,
+.solution-intro h2,
+.process-intro h2,
+.cases-intro h2,
+.about-story h2,
+.faq-intro h2,
+.final-cta h2 {
+  font-size: var(--type-section-title);
+  line-height: var(--leading-heading);
+  letter-spacing: -0.035em;
+}
+
+.problem-copy h2,
+.solution-intro h2,
+.process-intro h2,
+.cases-intro h2,
+.final-cta h2 {
+  margin-top: var(--space-title-from-eyebrow);
+}
+
+.eyebrow,
+.problem-section .eyebrow,
+.process-intro .eyebrow {
+  font-size: var(--type-eyebrow);
+  line-height: 1.4;
+  letter-spacing: 0.025em;
+}
+
+.hero-lead,
+.problem-lead,
+.solution-intro-copy,
+.process-lead,
+.cases-intro > p:last-child,
+.final-cta p:not(.eyebrow) {
+  font-size: var(--type-section-lead);
+  line-height: var(--leading-copy);
+}
+
+.problem-lead,
+.solution-intro-copy,
+.process-lead,
+.cases-intro > p:last-child,
+.final-cta p:not(.eyebrow) {
+  margin-top: var(--space-lead-from-title);
+}
+
+.process-lead { max-width: 58ch; }
+
+.problem-section,
+.solution-section,
+.process-section,
+.cases-section,
+.about-section,
+.faq-section,
+.final-cta {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+.problem-flow,
+.product-stack,
+.process-board,
+.case-shell {
+  margin-top: var(--space-section-content);
+}
+
+.product-stack { gap: var(--space-section-block); }
+.solution-end { margin-top: var(--space-section-content); }
+.faq-layout { gap: var(--space-section-content); }
+
+@media (max-width: 640px) {
+  :root {
+    --type-display: clamp(2.75rem, 12vw, 3.125rem);
+    --type-section-title: clamp(2.5rem, 10.8vw, 2.875rem);
+    --type-section-lead: 1.0625rem;
+    --type-eyebrow: 0.75rem;
+    --space-section-content: 2.5rem;
+    --space-section-block: 4rem;
+    --section-y: 5rem;
+  }
+
+  .hero-lead { margin-top: var(--space-lead-from-title); }
+  .solution-intro h2 { max-width: 11ch; }
 }
