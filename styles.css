@@ -333,25 +333,15 @@ main section[id] {
    ============================================================ */
 .hero {
   position: relative;
+  isolation: isolate;
   min-height: auto;
   display: flex;
   align-items: flex-start;
   overflow: hidden;
   background:
-    radial-gradient(720px 380px at 50% 43%, rgba(47, 129, 247, 0.075), transparent 72%),
-    radial-gradient(520px 300px at 50% 100%, rgba(47, 129, 247, 0.035), transparent 72%),
+    radial-gradient(ellipse 760px 430px at 50% 34%, rgba(47, 129, 247, 0.11) 0%, rgba(88, 166, 255, 0.055) 42%, transparent 74%),
+    radial-gradient(ellipse 620px 340px at 50% 96%, rgba(47, 129, 247, 0.065) 0%, rgba(88, 166, 255, 0.03) 48%, transparent 76%),
     var(--surface-page);
-}
-.hero-grid {
-  position: absolute; inset: -2px;
-  background-image:
-    linear-gradient(rgba(208, 215, 222, 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(208, 215, 222, 0.5) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(1100px 720px at 50% 42%, black 8%, transparent 82%);
-  -webkit-mask-image: radial-gradient(1100px 720px at 50% 42%, black 8%, transparent 82%);
-  animation: gridDrift 28s linear infinite;
-  opacity: 0.48;
 }
 
 .hero-inner {
@@ -1852,7 +1842,6 @@ main section[id] {
   70% { box-shadow: 0 0 0 8px rgba(63, 185, 80, 0); }
   100% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
 }
-@keyframes gridDrift { from { background-position: 0 0; } to { background-position: 46px 46px; } }
 @keyframes terminalBreathe {
   0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 18px 22px rgba(15, 25, 42, 0.18)); }
   50% { transform: translateY(-4px) scale(1.008); filter: drop-shadow(0 24px 26px rgba(15, 25, 42, 0.20)); }
@@ -2784,4 +2773,313 @@ main section[id] {
   .product-visual { padding: 14px; border-radius: 18px; }
   .solution-end { margin-top: 58px; }
   .solution-end .solution-cta { width: 100%; }
+}
+
+/* ============================================================
+   PROCESSO — placa de marcos com glassmorphism leve
+   ============================================================ */
+.process-section {
+  isolation: isolate;
+  overflow: hidden;
+  padding: 38px 0 100px;
+  border-top: 0;
+  background: linear-gradient(180deg, #fbfcfe 0%, #f8fafc 22%, #f8fafc 100%);
+}
+
+.process-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 16% -12% 2%;
+  background:
+    radial-gradient(circle at 20% 54%, rgba(47, 129, 247, 0.12), transparent 28%),
+    radial-gradient(circle at 82% 42%, rgba(129, 179, 238, 0.13), transparent 30%);
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+.process-container { max-width: 1240px; }
+
+.process-intro {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.process-intro .eyebrow {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.process-intro h2 {
+  margin-top: 18px;
+  color: #111923;
+  font-size: clamp(46px, 4.2vw, 58px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.process-lead {
+  max-width: 760px;
+  margin: 22px auto 0;
+  color: #586474;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.process-board {
+  margin-top: 27px;
+  border: 1px solid rgba(160, 184, 216, 0.44);
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(247, 251, 255, 0.68));
+  box-shadow:
+    0 28px 70px rgba(54, 94, 143, 0.13),
+    0 6px 20px rgba(54, 94, 143, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98);
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  backdrop-filter: blur(22px) saturate(125%);
+  overflow: hidden;
+}
+
+.process-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 34px 36px 64px;
+  border: 0;
+}
+
+.process-grid::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 67px;
+  right: calc(16.666% + 36px);
+  left: calc(16.666% + 36px);
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.92;
+}
+
+.process-step,
+.process-step:first-child,
+.process-step:last-child {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  padding: 0 42px;
+  border: 0;
+  text-align: center;
+}
+
+.process-step::before { content: none; }
+
+.process-step + .process-step::after {
+  content: "";
+  position: absolute;
+  top: 108px;
+  bottom: 4px;
+  left: 0;
+  width: 1px;
+  background: rgba(154, 174, 199, 0.38);
+}
+
+.process-number {
+  position: relative;
+  z-index: 2;
+  width: 68px;
+  height: 68px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 7px 18px rgba(47, 129, 247, 0.09);
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.process-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  margin-top: 30px;
+  color: var(--accent);
+}
+
+.process-icon svg {
+  width: 44px;
+  height: 44px;
+  stroke-width: 1.65;
+}
+
+.process-step h3 {
+  margin-top: 16px;
+  color: #151d27;
+  font-size: clamp(22px, 2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.process-step p {
+  max-width: 35ch;
+  margin: 15px auto 0;
+  color: #596575;
+  font-size: 16px;
+  line-height: 1.58;
+}
+
+.process-assurance {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  margin: 0;
+  padding: 22px 76px 24px;
+  border: 0;
+  border-top: 1px solid rgba(154, 174, 199, 0.34);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.44);
+  box-shadow: none;
+}
+
+.process-assurance-item {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+  justify-self: center;
+  width: min(100%, 410px);
+}
+
+.process-assurance-icon {
+  width: 58px;
+  height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.process-assurance-icon svg {
+  width: 25px;
+  height: 25px;
+  stroke-width: 1.8;
+}
+
+.process-assurance-icon--guarantee {
+  border-color: #21ad58;
+  color: #21ad58;
+}
+
+.process-assurance-item p {
+  max-width: 28ch;
+  color: #566170;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.42;
+}
+
+.process-assurance-item strong {
+  display: block;
+  color: #17202b;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.process-assurance-divider {
+  width: 1px;
+  height: 46px;
+  background: rgba(154, 174, 199, 0.42);
+}
+
+@media (max-width: 900px) {
+  .process-section { padding: 92px 0 68px; }
+  .process-intro { max-width: 720px; }
+  .process-intro h2 { font-size: clamp(46px, 7vw, 60px); }
+  .process-board { border-radius: 28px; }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 32px 40px 18px;
+  }
+
+  .process-grid::before {
+    top: 65px;
+    right: auto;
+    bottom: 48px;
+    left: 71px;
+    width: 2px;
+    height: auto;
+  }
+
+  .process-step,
+  .process-step:first-child,
+  .process-step:last-child {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 0 26px;
+    padding: 0 0 32px;
+    text-align: left;
+  }
+
+  .process-step + .process-step::after { content: none; }
+  .process-number { grid-row: 1 / 4; grid-column: 1; }
+  .process-icon { grid-row: 1; grid-column: 2; justify-content: flex-start; min-height: 0; margin: 8px 0 14px; }
+  .process-icon svg { width: 38px; height: 38px; }
+  .process-step h3 { grid-row: 2; grid-column: 2; margin-top: 0; }
+  .process-step p { grid-row: 3; grid-column: 2; max-width: 48ch; margin: 10px 0 0; }
+
+  .process-assurance {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 26px 40px 28px;
+  }
+
+  .process-assurance-item { justify-self: stretch; width: 100%; }
+  .process-assurance-divider { width: 100%; height: 1px; }
+}
+
+@media (max-width: 640px) {
+  .process-section { padding: 78px 0 58px; }
+  .process-section::before { inset: 10% -50% 0; }
+  .process-intro h2 { margin-top: 16px; font-size: clamp(42px, 12vw, 52px); line-height: 1.02; }
+  .process-lead { margin-top: 20px; font-size: 17px; line-height: 1.52; }
+  .process-board { margin-top: 34px; border-radius: 24px; }
+
+  .process-grid { padding: 26px 20px 10px; }
+  .process-grid::before { top: 53px; bottom: 42px; left: 47px; }
+
+  .process-step,
+  .process-step:first-child,
+  .process-step:last-child {
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 0 18px;
+    padding: 0 0 30px;
+  }
+
+  .process-number { width: 54px; height: 54px; font-size: 16px; }
+  .process-icon { margin-top: 4px; margin-bottom: 12px; }
+  .process-icon svg { width: 34px; height: 34px; }
+  .process-step h3 { font-size: 23px; }
+  .process-step p { margin-top: 9px; font-size: 15px; line-height: 1.55; }
+
+  .process-assurance { gap: 18px; padding: 22px 20px 24px; }
+  .process-assurance-item { grid-template-columns: 48px minmax(0, 1fr); gap: 16px; }
+  .process-assurance-icon { width: 48px; height: 48px; }
+  .process-assurance-icon svg { width: 22px; height: 22px; }
+  .process-assurance-item p { font-size: 15px; }
+  .process-assurance-item strong { font-size: 16px; }
 }

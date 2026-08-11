@@ -64,7 +64,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-grid" aria-hidden="true"></div>
     <div class="container hero-inner">
       <div class="hero-copy">
         <h1 data-reveal>Atendimento, vendas e operação. <span class="grad">Tudo mais simples.</span></h1>
@@ -232,42 +231,50 @@
 
   <!-- PROCESSO -->
   <section class="section process-section" id="processo">
-    <div class="container">
-      <div class="section-head split">
-        <div>
-          <p class="eyebrow" data-reveal>// do problema à implantação</p>
-          <h2 data-reveal data-delay="1">Um projeto claro do início ao fim.</h2>
+    <div class="container process-container">
+      <header class="process-intro">
+        <p class="eyebrow" data-reveal>// como o projeto acontece</p>
+        <h2 data-reveal data-delay="1">Clareza antes do código.</h2>
+        <p class="process-lead" data-reveal data-delay="2">
+          O projeto avança em marcos. Em cada um, você sabe o que foi decidido, o que vem agora e o que precisa aprovar.
+        </p>
+      </header>
+
+      <div class="process-board" data-reveal data-delay="2">
+        <div class="process-grid" role="list" aria-label="Etapas do projeto">
+          <article class="process-step" role="listitem">
+            <span class="process-number">01</span>
+            <span class="process-icon" aria-hidden="true"><i data-lucide="search"></i></span>
+            <h3>Entender o que trava</h3>
+            <p>Mapeio a operação, as pessoas, os dados e as restrições reais do negócio.</p>
+          </article>
+
+          <article class="process-step" role="listitem">
+            <span class="process-number">02</span>
+            <span class="process-icon" aria-hidden="true"><i data-lucide="pen-tool"></i></span>
+            <h3>Desenhar o caminho</h3>
+            <p>Transformo o problema em um sistema viável, com escopo, investimento e critérios de sucesso.</p>
+          </article>
+
+          <article class="process-step" role="listitem">
+            <span class="process-number">03</span>
+            <span class="process-icon" aria-hidden="true"><i data-lucide="rocket"></i></span>
+            <h3>Colocar para funcionar</h3>
+            <p>Construo, integro e testo com sua equipe até a solução entrar na rotina.</p>
+          </article>
         </div>
-        <p data-reveal data-delay="2">Cada etapa reduz a incerteza antes de avançar para a próxima.</p>
-      </div>
 
-      <div class="process-grid" data-reveal>
-        <article class="process-step" data-reveal data-delay="1">
-          <span class="process-number">01</span>
-          <div>
-            <h3>Diagnóstico</h3>
-            <p>Conversamos sobre o problema, o processo atual, as pessoas envolvidas e as restrições do projeto.</p>
+        <div class="process-assurance">
+          <div class="process-assurance-item">
+            <span class="process-assurance-icon process-assurance-icon--next" aria-hidden="true"><i data-lucide="arrow-right"></i></span>
+            <p>A próxima etapa só começa <strong>quando a anterior está clara.</strong></p>
           </div>
-        </article>
-        <article class="process-step" data-reveal data-delay="2">
-          <span class="process-number">02</span>
-          <div>
-            <h3>Solução e proposta</h3>
-            <p>Desenho o sistema e apresento escopo, responsabilidades, investimento, etapas e resultado esperado.</p>
+          <span class="process-assurance-divider" aria-hidden="true"></span>
+          <div class="process-assurance-item">
+            <span class="process-assurance-icon process-assurance-icon--guarantee" aria-hidden="true"><i data-lucide="check"></i></span>
+            <p><strong>30 dias de garantia técnica</strong> após a entrada em produção.</p>
           </div>
-        </article>
-        <article class="process-step" data-reveal data-delay="3">
-          <span class="process-number">03</span>
-          <div>
-            <h3>Implementação e adoção</h3>
-            <p>Construo, integro e testo em marcos. Depois, conduzo homologação, treinamento e estabilização.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="process-assurance" data-reveal>
-        <p>Antes de começar, você sabe o que será entregue, quanto custará e como o projeto será conduzido.</p>
-        <strong><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>30 dias de garantia técnica após a entrada em produção.</strong>
+        </div>
       </div>
     </div>
   </section>

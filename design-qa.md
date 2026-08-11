@@ -108,6 +108,53 @@ final result: passed
 
 final result: blocked
 
+---
+
+# Design QA — Processo “Clareza antes do código”
+
+Data: 2026-08-11
+
+## Fonte visual e estado comparado
+
+- Fonte visual autoritativa: `C:\Users\Eliseu Santos\.codex\generated_images\019fef00-b248-71d2-aa35-538bafecbf60\exec-6273f0b4-5c44-4ca8-81b4-08dafccb3318.png`.
+- Fonte: 1487 × 1058 px, normalizada com Lanczos para 1425 × 1013 px na comparação desktop.
+- Implementação desktop: `qa/process-redesign/implementation-desktop-final.png`, 1425 × 1013 px, viewport solicitado de 1440 × 1024 CSS px, densidade 1×.
+- Implementação mobile: `qa/process-redesign/implementation-mobile-390.png`, `qa/process-redesign/implementation-mobile-board-390.png` e `qa/process-redesign/implementation-mobile-assurance-390.png`, 375 × 812 px visíveis sob viewport solicitado de 390 × 844 CSS px, densidade 1×.
+- Estado: acesso direto a `#processo`, header fixo visível, animações concluídas e nenhuma interação ativa.
+- Comparação full-view combinada: `qa/process-redesign/comparison-desktop-final.png`.
+- Evidência focada: as duas capturas mobile isolam a trilha de marcos e o fechamento/garantia; no desktop, todo o texto, os ícones e as bordas permanecem legíveis na comparação full-view, então não foi necessário um recorte adicional.
+
+## Histórico de comparação e correções
+
+- Iteração inicial — P1: o conteúdo começava cerca de 80 px abaixo do mockup e a placa ficava compacta demais, alterando a composição acima da dobra. Evidência: `qa/process-redesign/comparison-desktop-before.png`.
+  - Correção: redistribuição do padding superior/inferior da seção, redução do título, ajuste da margem antes da placa e aumento do espaço interno do trilho.
+- Iteração intermediária — P2: largura da placa, escala do título e transição para Cases ainda apresentavam leve deriva. Evidência: `qa/process-redesign/comparison-desktop-iteration-1.png`.
+  - Correção: container limitado a 1240 px, título calibrado, altura da placa ajustada e respiro inferior equilibrado.
+- Pós-correção: a comparação final alinha introdução, placa, marcos, fechamento e início de Cases sem diferenças P0, P1 ou P2 acionáveis.
+
+## Superfícies de fidelidade
+
+- Fontes e tipografia: Satoshi e JetBrains Mono locais preservadas; pesos, hierarquia, quebras e alinhamento central correspondem ao mockup. A pequena diferença de rasterização da imagem gerada é classificada como P3.
+- Espaçamento e ritmo: introdução, placa, linha horizontal, três colunas, rodapé de garantia e transição para Cases estão proporcionais à fonte; desktop permanece horizontal e mobile vira uma trilha vertical coerente.
+- Cores e tokens: fundo branco/frio, azul Eliseu.io, verde de garantia, bordas translúcidas e sombra azul-cinza correspondem à direção aprovada; contraste de texto permanece legível.
+- Imagens e ativos: a seção não exige raster adicional. Logo existente preservado e os cinco ícones vêm da biblioteca Lucide local já adotada pelo projeto; não há SVG artesanal, emoji ou placeholder.
+- Copy e conteúdo: eyebrow, título, lead, três passos e os dois textos de fechamento correspondem ao mockup aprovado. Os blocos “saída”, “diagnóstico e prioridades”, “proposta clara” e “sistema adotado” foram removidos integralmente.
+- Acessibilidade: heading semântico, lista de etapas com `role=list/listitem`, ícones decorativos ocultos e ausência de overflow horizontal no viewport mobile.
+
+## Validação funcional
+
+- O link de navegação “Cases” foi acionado e resolveu corretamente para `#cases`.
+- A seção não contém controles interativos próprios; o header fixo e os CTAs existentes continuam visíveis.
+- Cinco ícones foram renderizados na seção.
+- Nenhum erro ou aviso foi encontrado no console.
+- `node --check script.js` e `git diff --check` passaram.
+
+## Follow-up polish
+
+- P3 opcional: refinar alguns pixels da escala dos ícones e da suavidade da sombra após avaliação no monitor final do usuário; não bloqueia fidelidade ou uso.
+
+final result: passed
+
 A implementação preserva a tese visual aprovada: três produtos independentes, claramente separados e conectáveis, com densidade suficiente para explicar rapidamente Sites, CRM com Kommo e Automação & IA.
 
 ## Fonte visual e evidências
@@ -199,3 +246,11 @@ final result: passed
 O relatório “Design QA — Solução com seções independentes e alternadas” é o registro autoritativo da implementação mais recente. As aprovações anteriores acima pertencem a versões antigas da seção e não aprovam este redesign. A captura browser-rendered desktop/mobile continua indisponível devido ao bloqueio de segurança da URL local no navegador interno.
 
 final result: blocked
+
+---
+
+## Gate atual — Processo “Clareza antes do código”
+
+O relatório “Design QA — Processo ‘Clareza antes do código’” acima é o registro autoritativo da implementação atual. A captura browser-rendered desktop/mobile, a comparação combinada, o teste de navegação e a verificação do console foram concluídos. O gate bloqueado anterior pertence exclusivamente a uma versão antiga da seção Solução e não se aplica a este redesign do Processo.
+
+final result: passed
