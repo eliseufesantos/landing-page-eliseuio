@@ -2458,9 +2458,27 @@ main section[id] {
     border-left: 0;
   }
   .architecture-result { grid-column: auto; }
-  .architecture-flow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .architecture-line { display: none; }
-  .architecture-node { min-height: 64px; }
+  .architecture-flow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .architecture-node {
+    min-height: 54px;
+    padding: 13px 16px;
+    justify-content: flex-start;
+    border-radius: 12px;
+    font-size: 12.5px;
+    text-align: left;
+  }
+  .architecture-line {
+    display: block;
+    justify-self: start;
+    width: 1px;
+    height: 14px;
+    margin-left: 20px;
+    background: rgba(88, 166, 255, 0.62);
+  }
   .case-main-cta { width: 100%; }
   .about-section {
     padding-top: 52px;

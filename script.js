@@ -118,7 +118,6 @@
 
   function setCase(index) {
     activeCase = ((index % cases.length) + cases.length) % cases.length;
-    caseOpen = false;
     renderCase();
   }
 

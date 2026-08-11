@@ -1,3 +1,97 @@
+# Design QA — padrão mobile e estado global dos cases
+
+Data: 2026-08-11
+
+Este é o gate autoritativo da versão atual dos cases.
+
+## Fonte, implementação e estado
+
+- Padrão visual selecionado: `qa/cases-redesign/implementation-mobile-fiap-flow-fixed-390.png`, 375 × 865 px, derivado da correção aprovada para a FIAP.
+- Estúdios: `qa/cases-redesign/implementation-mobile-studios-vertical-flow.png`, 375 × 865 px.
+- FIAP: `qa/cases-redesign/implementation-mobile-fiap-vertical-flow.png`, 375 × 865 px.
+- Eucalyptus: `qa/cases-redesign/implementation-mobile-eucalyptus-vertical-flow.png`, 375 × 865 px.
+- Viewport de captura: 390 × 900 CSS px, densidade 1×.
+- Evidência adicional em 320 × 800 CSS px: `qa/cases-redesign/implementation-mobile-eucalyptus-vertical-flow-320.png`, 305 × 763 px visíveis.
+- Comparação full-view combinada: `qa/cases-redesign/comparison-mobile-all-vertical-flows.png`.
+- A comparação já é focada no detalhamento de arquitetura; os três fluxos e seus textos estão legíveis, dispensando outro recorte.
+- Estado: arquitetura aberta ao alternar entre os três cases; depois, arquitetura fechada no Eucalyptus e retorno aos Estúdios mantendo o estado fechado.
+
+## Findings e histórico
+
+- [P2] Apenas a FIAP usava a esteira vertical no mobile, enquanto Estúdios e Eucalyptus mantinham a grade 2 × 2. A diferença fazia a mesma interação parecer ter três sistemas visuais.
+- Correção: todos os quatro passos agora ocupam uma coluna, com conectores verticais e dimensões iguais em cada case.
+- [P1] Trocar de case redefinia `caseOpen` para `false`, interrompendo a comparação entre arquiteturas e contradizendo o estado percebido pelo usuário.
+- Correção: `caseOpen` passou a ser um estado global do carrossel. Navegação por chips ou setas preserva a abertura; apenas o controle “Ocultar arquitetura e processo” fecha o detalhamento.
+- Evidência pós-correção: Estúdios aberto → FIAP aberta (`2 / 3`) → Eucalyptus aberta (`3 / 3`); após fechar, retorno aos Estúdios com `aria-expanded="false"` e sem a classe `open`.
+- Nenhuma divergência P0, P1 ou P2 permanece acionável.
+
+## Superfícies de fidelidade
+
+- Tipografia: rótulos usam o mesmo tamanho, peso e alinhamento à esquerda nos três fluxos.
+- Espaçamento e layout: nós de 54 px, conectores de 14 px e largura integral da coluna; em 390 px todos medem 293 px e em 320 px medem 223 px.
+- Cores e tokens: bordas e conectores reutilizam o azul da arquitetura existente.
+- Imagens e ativos: imagens dos cases e iconografia não foram alteradas.
+- Copy e conteúdo: todos os passos originais permanecem integrais e na ordem correta.
+- Acessibilidade: `aria-expanded` acompanha o estado global; chips preservam `aria-pressed`; não há overflow horizontal.
+
+## Validação funcional
+
+- Abertura nos Estúdios e navegação seguinte até FIAP e Eucalyptus mantendo `aria-expanded="true"`.
+- Fechamento no Eucalyptus e retorno aos Estúdios mantendo `aria-expanded="false"`.
+- Fluxos verticais verificados visualmente nos três cases.
+- Viewports 390 × 900 e 320 × 800 com `overflowX: 0`.
+- Nenhum erro ou aviso no console.
+- `node --check script.js` e `git diff --check` passaram.
+
+final result: passed
+
+---
+
+# Design QA — fluxo mobile do case FIAP
+
+Data: 2026-08-11
+
+Este é o gate autoritativo da versão atual dos cases.
+
+## Fonte, implementação e estado
+
+- Direção visual aprovada: `C:\Users\Eliseu Santos\.codex\generated_images\019fe259-02fe-75b1-88d7-1544d85aefd0\exec-dda3815a-0cad-47c1-94e4-dfc8de19d9ec.png`, 1440 × 1280 px.
+- Evidência do defeito mobile: `C:\Users\ELISEU~1\AppData\Local\Temp\codex-clipboard-b9b36423-307f-4332-a787-10bbb12381c9.png`, 357 × 953 px.
+- Implementação corrigida em 390 px: `qa/cases-redesign/implementation-mobile-fiap-flow-fixed-390.png`, 375 × 865 px visíveis sob viewport 390 × 900 CSS px, densidade 1×.
+- Implementação corrigida em 320 px: `qa/cases-redesign/implementation-mobile-fiap-flow-fixed-320.png`, 305 × 763 px visíveis sob viewport 320 × 800 CSS px, densidade 1×.
+- Estado: FIAP ativa, arquitetura aberta e solução implementada visível.
+- Comparação combinada e normalizada: `qa/cases-redesign/comparison-mobile-fiap-flow-fix.png`.
+- A comparação já é um recorte focado no detalhamento completo; outro recorte não foi necessário porque títulos, textos, conectores e resultado permanecem legíveis.
+
+## Findings e histórico
+
+- [P2] A grade 2 × 2 quebrava a leitura sequencial do processo e comprimia “edição · estrutura visual · ativos” numa caixa curta, fazendo os quatro passos parecerem independentes.
+- Correção: apenas a FIAP usa uma esteira vertical conectada no mobile. Cada passo ocupa toda a largura útil e os conectores reaparecem entre os nós.
+- Evidência pós-correção: a comparação `comparison-mobile-fiap-flow-fix.png` mostra a sequência Professor → Diagramador com IA → edição/estrutura/ativos → plataforma final sem ambiguidade.
+- Em 320 px, cada nó mede 223 × 54 px e nenhum conteúdo ultrapassa a superfície.
+- Nenhuma divergência P0, P1 ou P2 permanece acionável.
+
+## Superfícies de fidelidade
+
+- Tipografia: pesos, tamanhos e quebras continuam coerentes; o rótulo longo cabe em uma linha nos dois breakpoints testados.
+- Espaçamento e layout: a esteira usa 54 px por nó e conectores de 14 px; cenário e resultado mantêm os divisores existentes.
+- Cores e tokens: bordas e conectores reutilizam o azul já empregado na arquitetura.
+- Imagens e ativos: nenhuma imagem ou iconografia foi alterada.
+- Copy e conteúdo: os quatro passos permanecem integrais e na ordem correta.
+- Acessibilidade: conectores são decorativos, a arquitetura mantém `aria-expanded="true"` e não há overflow horizontal.
+
+## Validação
+
+- FIAP selecionada e arquitetura aberta pelo navegador.
+- Viewports 390 × 900 e 320 × 800 com `overflowX: 0`.
+- Em 320 px, a classe específica da FIAP e os quatro nós foram confirmados no DOM.
+- Nenhum erro ou aviso no console durante a validação.
+- `node --check script.js` e `git diff --check` passaram.
+
+final result: passed
+
+---
+
 # Design QA — link compacto de arquitetura dos cases
 
 Data: 2026-08-11
