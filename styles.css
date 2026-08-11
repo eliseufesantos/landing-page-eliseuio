@@ -1600,10 +1600,35 @@ main section[id] {
    FAQ
    ============================================================ */
 .faq-section {
+  isolation: isolate;
+  overflow: hidden;
   padding-top: clamp(116px, 8vw, 136px);
   border-top: 0;
   border-radius: 0;
-  background: linear-gradient(180deg, var(--surface-card) 0%, #edf6ff 34%, #eaf4ff 100%);
+  background: linear-gradient(
+    180deg,
+    var(--surface-card) 0%,
+    #fbfdff 28%,
+    #f7faff 52%,
+    #f2f8ff 76%,
+    #edf5ff 100%
+  );
+}
+
+.faq-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto -14% -12%;
+  height: 46%;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(88, 166, 255, 0.10) 0%,
+    rgba(88, 166, 255, 0.045) 44%,
+    transparent 74%
+  );
+  filter: blur(38px);
+  pointer-events: none;
 }
 .faq-layout {
   display: grid;
@@ -3055,6 +3080,7 @@ main section[id] {
 @media (max-width: 640px) {
   .process-section { padding: 78px 0 58px; }
   .process-section::before { inset: 10% -50% 0; }
+  .faq-section::before { inset: auto -45% -10%; height: 48%; }
   .process-intro h2 { margin-top: 16px; font-size: clamp(42px, 12vw, 52px); line-height: 1.02; }
   .process-lead { margin-top: 20px; font-size: 17px; line-height: 1.52; }
   .process-board { margin-top: 34px; border-radius: 24px; }
