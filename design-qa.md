@@ -1,3 +1,49 @@
+# Design QA — reforço do CTA de arquitetura dos cases
+
+Data: 2026-08-11
+
+## Fonte, implementação e estado
+
+- Fonte visual: `C:\Users\Eliseu Santos\.codex\generated_images\019fe259-02fe-75b1-88d7-1544d85aefd0\exec-dda3815a-0cad-47c1-94e4-dfc8de19d9ec.png`, 1440 × 1280 px.
+- Implementação desktop aberta: `qa/cases-redesign/implementation-desktop-cta-open.png`, 1440 × 1280 px em viewport 1440 × 1280 CSS px e densidade 1×.
+- Implementação desktop fechada: `qa/cases-redesign/implementation-desktop-cta-closed.png`.
+- Implementação desktop em hover: `qa/cases-redesign/implementation-desktop-cta-hover.png`.
+- Implementação mobile fechada: `qa/cases-redesign/implementation-mobile-cta-closed.png`, 390 × 844 px em viewport 390 × 844 CSS px e densidade 1×.
+- Comparação full-view combinada: `qa/cases-redesign/comparison-desktop-cta-open.png`.
+- Comparação focada no CTA: `qa/cases-redesign/comparison-desktop-cta-focus.png`.
+- Estado comparado: case Estúdios ativo, arquitetura aberta e header real da landing visível.
+
+## Findings e histórico
+
+- Pedido de produto: o link original tinha baixo contraste e pouca área clicável, podendo parecer um detalhe decorativo.
+- Correção: o controle recebeu superfície azul discreta, borda, área clicável de 62 px, título e microcopy, seta circular e animação direcional suave.
+- Hover: elevação de 2 px, aumento de contraste e halo contido reforçam a resposta interativa.
+- Estado aberto: a animação para, a seta gira e o texto muda para “Ocultar”, reduzindo distração enquanto o detalhamento está visível.
+- A alteração é uma evolução intencional sobre a referência aprovada. A comparação focada confirma mais affordance sem alterar painel, imagem, navegação ou arquitetura.
+- Nenhuma divergência P0, P1 ou P2 foi encontrada após a mudança.
+
+## Superfícies de fidelidade
+
+- Fontes e tipografia: Satoshi e a hierarquia do painel foram preservadas; o CTA usa 15 px no desktop e 14 px no mobile, com microcopy de 11 px.
+- Espaçamento e layout: o botão ocupa a largura do painel sem deslocar a composição; no mobile, permanece dentro do card e pode quebrar o título em duas linhas.
+- Cores e tokens: o azul já usado no case foi reaproveitado em opacidade moderada; contraste e foco permanecem legíveis.
+- Imagem e ativos: nenhum asset visual foi alterado; a seta existente foi mantida.
+- Copy e conteúdo: “Explorar arquitetura e processo” e “Veja o fluxo completo por dentro” explicam a ação e o benefício antes do clique.
+- Acessibilidade: foco visível, `aria-expanded` verificado em `false` e `true`, label atualizado por estado e animação neutralizada por `prefers-reduced-motion` global.
+
+## Validação funcional
+
+- Hover desktop capturado e inspecionado.
+- Clique abriu a arquitetura e atualizou `aria-expanded="true"`.
+- Estado aberto interrompeu a animação direcional e girou a seta.
+- Mobile 390 × 844 sem overflow horizontal (`overflowX: 0`).
+- Console verificado sem erros após as interações.
+- `node --check script.js` e `git diff --check` passaram.
+
+final result: passed
+
+---
+
 # Design QA — seção de cases
 
 ## Resultado
