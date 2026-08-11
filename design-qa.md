@@ -61,6 +61,53 @@ A seção implementada preserva a direção visual aprovada: um único palco edi
 
 final result: passed
 
+---
+
+# Design QA — Solução com seções independentes e alternadas
+
+## Fonte visual, implementação e estado
+
+- Fonte visual aprovada: `C:\Users\Eliseu Santos\.codex\generated_images\019fe24d-2e1a-75c0-ae4b-06bc3712291c\exec-d551f985-5e0c-4303-a626-f67337cf26ef.png`.
+- Dimensões da fonte: 971 × 1619 px.
+- Implementação: `index.html` e `styles.css`, servidos em `http://127.0.0.1:4173/#solucao`.
+- Viewports planejados: desktop 1440 × 1200 CSS px e mobile 390 × 844 CSS px, DPR 1.
+- Screenshot browser-rendered da implementação: indisponível.
+- Estado esperado: seção Solução revelada, Sites com texto à esquerda, CRM com texto à direita, Automação & IA com texto à esquerda.
+
+## Evidência disponível
+
+- O servidor local respondeu HTTP 200 após ser reiniciado.
+- O HTML servido contém uma instância de cada superfície nova: `product-visual--sites`, `product-visual--crm`, `product-visual--automation` e `solution-end`.
+- `node --check script.js` e `git diff --check` passaram.
+- A tentativa de captura pelo navegador interno foi recusada pela política de segurança de URL local. Por isso, não existe comparação visual combinada válida entre a fonte e a implementação.
+
+## Superfícies de fidelidade
+
+- Tipografia: mapeada para as famílias locais Satoshi e JetBrains Mono; verificação visual bloqueada.
+- Espaçamento e layout: a estrutura foi alterada para três seções independentes, com 112 px de intervalo no desktop e empilhamento no mobile; verificação visual bloqueada.
+- Cores e tokens: superfícies azul, lilás e verde existentes foram preservadas somente atrás de cada demonstração; verificação visual bloqueada.
+- Imagens e ativos: marca Kommo e ícones Lucide locais foram preservados; verificação de recorte e nitidez bloqueada.
+- Copy e conteúdo: mantidos os três produtos, uma frase por produto e um único CTA final.
+- Interações: o CTA continua apontando para WhatsApp; hover, foco e comportamento responsivo não puderam ser exercitados no navegador.
+
+## Findings
+
+- [P1] Captura visual e teste responsivo indisponíveis.
+  - Local: seção `#solucao`.
+  - Evidência: o navegador interno recusou a inspeção automatizada da URL local por política de segurança.
+  - Impacto: não é possível confirmar ausência de sobreposição, clipping, overflow ou divergências de escala contra o mockup aprovado.
+  - Correção necessária: recarregar a prévia local no navegador do app e executar a comparação desktop/mobile quando a inspeção estiver disponível.
+
+## Comparação focada
+
+- Bloqueada pelo mesmo motivo; não há screenshot browser-rendered para recortar ou combinar com a fonte.
+
+## Histórico
+
+- Iteração atual: HTML e CSS implementados; servidor reiniciado; validações estáticas aprovadas; QA visual bloqueada antes da primeira comparação.
+
+final result: blocked
+
 A implementação preserva a tese visual aprovada: três produtos independentes, claramente separados e conectáveis, com densidade suficiente para explicar rapidamente Sites, CRM com Kommo e Automação & IA.
 
 ## Fonte visual e evidências
@@ -144,3 +191,11 @@ Não restam diferenças P0, P1 ou P2 relevantes para a implementação solicitad
 Não restam diferenças P0, P1 ou P2 acionáveis após a correção.
 
 final result: passed
+
+---
+
+## Gate atual — seções independentes e alternadas
+
+O relatório “Design QA — Solução com seções independentes e alternadas” é o registro autoritativo da implementação mais recente. As aprovações anteriores acima pertencem a versões antigas da seção e não aprovam este redesign. A captura browser-rendered desktop/mobile continua indisponível devido ao bloqueio de segurança da URL local no navegador interno.
+
+final result: blocked
