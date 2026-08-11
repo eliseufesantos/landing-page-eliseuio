@@ -92,10 +92,7 @@
           ? '<div class="case-metric"><span class="case-metric-value">' + esc(item.metric.value) + '</span><span class="case-metric-label">' + esc(item.metric.label) + "</span></div>"
           : "") +
         '<button class="case-expand-trigger" id="expandBtn" type="button" aria-expanded="' + caseOpen + '" aria-controls="caseArchitecture">' +
-            '<span class="expand-copy">' +
-              '<span class="expand-label">' + (caseOpen ? "Ocultar arquitetura e processo" : "Explorar arquitetura e processo") + "</span>" +
-              '<span class="expand-hint">' + (caseOpen ? "Voltar para a visão resumida" : "Veja o fluxo completo por dentro") + "</span>" +
-            "</span>" +
+            '<span class="expand-label">' + (caseOpen ? "Ocultar arquitetura e processo" : "Explorar arquitetura e processo") + "</span>" +
             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>' +
           "</button>" +
       "</article>";

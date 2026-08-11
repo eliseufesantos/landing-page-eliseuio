@@ -1,4 +1,49 @@
-# Design QA — reforço do CTA de arquitetura dos cases
+# Design QA — link compacto de arquitetura dos cases
+
+Data: 2026-08-11
+
+Este é o gate autoritativo da versão atual.
+
+## Fonte, implementação e estado
+
+- Fonte visual: `C:\Users\Eliseu Santos\.codex\generated_images\019fe259-02fe-75b1-88d7-1544d85aefd0\exec-dda3815a-0cad-47c1-94e4-dfc8de19d9ec.png`, 1440 × 1280 px.
+- Implementação desktop aberta: `qa/cases-redesign/implementation-desktop-link-compact-open.png`, 1440 × 1280 px em viewport 1440 × 1280 CSS px, densidade 1×.
+- Implementação desktop fechada e hover: `qa/cases-redesign/implementation-desktop-link-compact.png` e `implementation-desktop-link-compact-hover.png`.
+- Implementação mobile: `qa/cases-redesign/implementation-mobile-390-link-compact.png`, 390 × 844 px, e `implementation-mobile-320-link-compact.png`, 320 × 700 px, densidade 1×.
+- Comparação full-view combinada: `qa/cases-redesign/comparison-desktop-link-compact-open.png`.
+- Comparação focada no controle: `qa/cases-redesign/comparison-desktop-link-compact-focus.png`.
+- Estado comparado: arquitetura aberta, com o case Estúdios ativo no desktop; estados fechado e aberto também exercitados nos breakpoints menores.
+
+## Histórico de comparação
+
+- [P1] Iteração anterior: o controle ocupava toda a largura do painel, adicionava uma segunda linha e criava uma superfície semelhante a um grande botão. Isso competia com o título e quebrava a hierarquia em telas estreitas.
+- Correção: remoção da caixa, da microcopy, da largura forçada, da sombra e da elevação. O controle voltou a ser um link editorial de 38 px no desktop e 36 px em 390 px.
+- Post-fix: em 320 px, o texto quebra de forma natural e o controle mede 173 × 48 px, sem sair do painel; `overflowX: 0` em 390 px e 320 px.
+- A comparação focada confirma que a implementação voltou a ficar próxima da referência, acrescentando apenas sublinhado e uma seta circular pequena para affordance.
+- Nenhuma diferença P0, P1 ou P2 permanece acionável.
+
+## Superfícies de fidelidade
+
+- Tipografia: Satoshi preservada; rótulo com 15 px no desktop e 13,5 px no mobile, sem competir com o título do case.
+- Espaçamento e layout: largura baseada no conteúdo, sem fundo próprio; painel, imagem e navegação não foram deslocados.
+- Cores e tokens: azul do sistema reaproveitado; sublinhado de baixo contraste ganha força apenas no hover.
+- Imagens e ativos: nenhum asset foi alterado; a seta existente permanece com 24 px.
+- Copy e conteúdo: “Explorar arquitetura e processo” comunica a ação sem adicionar explicações ou peso visual desnecessário.
+- Acessibilidade: foco visível, `aria-expanded` alternado entre `false` e `true` e animação coberta por `prefers-reduced-motion`.
+
+## Validação
+
+- Hover e clique verificados no desktop.
+- Abertura da arquitetura confirmada em 1440 px e 320 px.
+- Viewports 390 × 844 e 320 × 700 sem overflow horizontal.
+- Nenhum erro ou aviso no console.
+- `node --check script.js` e `git diff --check` passaram.
+
+final result: passed
+
+---
+
+# Design QA — reforço do CTA de arquitetura dos cases (versão substituída)
 
 Data: 2026-08-11
 
