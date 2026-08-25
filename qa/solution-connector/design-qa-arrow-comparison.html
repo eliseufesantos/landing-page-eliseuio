@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparação — seta do conector</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 24px; background: #e9edf3; color: #101828; font-family: Arial, sans-serif; }
+    h1 { margin: 0 0 20px; font-size: 24px; }
+    .comparison { display: grid; grid-template-columns: minmax(320px, 0.7fr) minmax(0, 1.3fr); gap: 20px; align-items: start; }
+    .panel { padding: 14px; border: 1px solid #d0d8e4; border-radius: 16px; background: #fff; }
+    .panel h2 { margin: 0 0 12px; font-size: 15px; }
+    .panel img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    .reference img { image-rendering: auto; }
+    .implementation { display: grid; gap: 14px; }
+  </style>
+</head>
+<body>
+  <h1>Final do conector — referência × implementação</h1>
+  <main class="comparison">
+    <section class="panel reference">
+      <h2>Problema apontado</h2>
+      <img src="reference-arrow-feedback.png" alt="Triângulo anterior encostado no CTA">
+    </section>
+    <section class="implementation">
+      <div class="panel">
+        <h2>Implementação desktop</h2>
+        <img src="implemented-arrow-cta-desktop.png" alt="Seta e degradê no desktop">
+      </div>
+      <div class="panel">
+        <h2>Implementação mobile</h2>
+        <img src="implemented-arrow-cta-mobile.png" alt="Seta e degradê no mobile">
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -47,6 +47,49 @@ final result: passed
 
 ---
 
+# Design QA — seta final do conector da seção Solução
+
+Data: 2026-08-25
+
+## Fonte visual, implementação e estado
+
+- Evidência visual do problema: `qa/solution-connector/reference-arrow-feedback.png`, 471 × 148 px.
+- Implementação desktop: `qa/solution-connector/implemented-arrow-cta-desktop.png`, 1440 × 1024 px, viewport 1440 × 1024 CSS px, densidade 1×.
+- Implementação mobile: `qa/solution-connector/implemented-arrow-cta-mobile.png`, 390 × 844 px, viewport 390 × 844 CSS px, densidade 1×.
+- Comparação combinada: `qa/solution-connector/design-qa-arrow-comparison.png`.
+- Estado: seção `#solucao` revelada, animação do conector concluída, CTA centralizado e seta apontando para o botão.
+- A comparação é focada no fechamento do conector; outro recorte não foi necessário porque linha, corte diagonal, seta, espaço e CTA estão legíveis nas duas capturas.
+- Normalização: as três imagens aparecem na mesma prancha sem distorção; a referência curta documenta o defeito e as capturas reais mostram a correção no contexto desktop e mobile.
+
+## Findings e histórico
+
+- [P2] O fechamento anterior parecia um triângulo contornado e encostava no CTA, criando ruído visual e enfraquecendo a direção do fluxo.
+- Correção: o encaixe foi substituído por uma seta completa, preenchida pelo mesmo degradê do trecho final e sem `stroke`.
+- [P2] O trecho final era curto demais para tornar legível a transição azul → verde.
+- Correção: o espaço entre Automação & IA e CTA aumentou em 40 px; a haste final ganhou comprimento e a transição agora passa por azul `#176df1`, azul intermediário `#237ee4`, turquesa `#1baab1` e verde `#1fca6b`.
+- Pós-correção: a seta termina antes do botão, deixando espaço negativo claro, e aponta diretamente para o centro do CTA em desktop e mobile.
+- Nenhuma divergência P0, P1 ou P2 permanece acionável.
+
+## Superfícies de fidelidade
+
+- Fontes e tipografia: CTA, título e textos da seção não foram alterados.
+- Espaçamento e layout: eixo e CTA continuam centralizados com desvio inferior a 0,01 px; o fechamento agora tem respiro suficiente para a seta ser reconhecida.
+- Cores e tokens: degradê mais distribuído e verde final idêntico ao fundo do CTA.
+- Imagens e ativos: mocks, marca Kommo e iconografia existentes permanecem intactos; a seta integra o SVG decorativo responsivo do conector.
+- Copy e conteúdo: nenhuma copy foi alterada.
+- Acessibilidade: conector permanece `aria-hidden`, sem stroke preto, sem círculos e com `prefers-reduced-motion` preservado.
+
+## Validação funcional
+
+- Desktop 1440 × 1024 e mobile 390 × 844 verificados no navegador.
+- Seta com `stroke: none`, preenchimento pelo degradê final e alinhamento ao centro do CTA.
+- Sem overflow horizontal e sem erros no console.
+- `node --check script.js` e `git diff --check` passaram.
+
+final result: passed
+
+---
+
 # Design QA — fluxo mobile do case FIAP
 
 Data: 2026-08-11
@@ -494,5 +537,62 @@ final result: passed
 ## Gate atual — linha semiótica vertical da seção Problema
 
 O relatório “Design QA — linha semiótica vertical da seção Problema” acima é o registro autoritativo desta alteração. A referência, o ativo vertical, as capturas mobile e desktop, a comparação combinada, o overflow e o console foram verificados no navegador local.
+
+final result: passed
+
+---
+
+# Design QA — conector segmentado da seção Solução
+
+Data: 2026-08-25
+
+## Fonte visual, implementação e estado
+
+- Fonte visual selecionada: `qa/solution-connector/reference-option-3.png`, 1024 × 1536 px.
+- Implementação desktop do fluxo: `qa/solution-connector/implemented-segmented-flow.png`, 1440 × 1024 px, viewport 1440 × 1024 CSS px, densidade 1×.
+- Implementação desktop do CTA: `qa/solution-connector/implemented-segmented-cta.png`, 1440 × 1024 px, viewport 1440 × 1024 CSS px, densidade 1×.
+- Implementação mobile: `qa/solution-connector/implemented-segmented-mobile-flow.png` e `qa/solution-connector/implemented-segmented-mobile-cta.png`, 390 × 844 px, viewport 390 × 844 CSS px, densidade 1×.
+- Estado: seção `#solucao` revelada, animação do conector concluída, header fixo e CTA final visíveis.
+- Comparação full-view combinada: `qa/solution-connector/design-qa-comparison.png`.
+- Comparação focada: as capturas desktop do CTA e mobile isolam a transição azul → verde, o encaixe trapezoidal e o comportamento responsivo; não foi necessário outro recorte.
+- Normalização: a fonte vertical e as capturas reais foram dimensionadas proporcionalmente dentro da mesma prancha, sem distorção. A comparação prioriza o sistema do conector, pois a referência gerada resume a seção em uma proporção diferente da landing real.
+
+## Findings e histórico
+
+- O mock selecionado define uma haste azul firme de 8 px, com cortes diagonais brancos, desaparecendo sob cada mock e reaparecendo nos espaços entre eles.
+- Implementação: o conector usa duas hastes contínuas alinhadas no mesmo eixo — azul até a saída de Automação & IA e degradê apenas no trecho final — com três cortes diagonais e sem qualquer círculo ou marcador arredondado.
+- Adaptação solicitada: o trecho final transita de `#176df1` para `#1fca6b`, exatamente a cor de fundo do CTA, e termina num encaixe trapezoidal verde integrado ao centro do botão.
+- Responsividade: no mobile, o eixo permanece central e é mascarado atrás das áreas de copy e dos mocks; o CTA continua centralizado e o conector não atravessa texto.
+- Nenhuma divergência P0, P1 ou P2 permanece acionável na primeira comparação pós-implementação.
+
+## Superfícies de fidelidade
+
+- Fontes e tipografia: não foram alteradas; Satoshi, pesos, quebras e hierarquia da seção permanecem iguais à landing real.
+- Espaçamento e layout: o eixo passa pelo centro do container, mantém 8 px de espessura e encaixa no centro geométrico do CTA com desvio inferior a 0,01 px nos dois viewports.
+- Cores e tokens: azul `#176df1`, transição intermediária `#1d91d7` e verde final `#1fca6b`; o último stop corresponde ao fundo do CTA.
+- Imagens e ativos: os três mocks, marca Kommo, ícones e imagens existentes não foram alterados. O conector permanece SVG decorativo responsivo porque depende das posições reais dos componentes.
+- Copy e conteúdo: copy, títulos, labels e CTA permanecem integrais.
+- Acessibilidade: SVG segue `aria-hidden`, nenhum círculo semântico foi introduzido, a animação respeita `prefers-reduced-motion` e não há overflow horizontal.
+
+## Validação funcional
+
+- Desktop 1440 × 1024 e mobile 390 × 844 verificados no navegador.
+- Zero círculos no conector; três cortes diagonais presentes; largura computada de 8 px.
+- CTA confirmado centralizado, com `href` existente preservado, sem acionamento externo durante o teste.
+- `overflowX` negativo pela largura reservada da scrollbar, sem conteúdo ultrapassando o viewport.
+- Nenhum erro de console.
+- `node --check script.js` e `git diff --check` passaram.
+
+## Follow-up polish
+
+- P3 opcional: reduzir a haste para 7 px em telas abaixo de 360 px caso o monitor final faça o eixo parecer pesado; não bloqueia leitura ou fidelidade.
+
+final result: passed
+
+---
+
+## Gate atual — seta final do conector da seção Solução
+
+O relatório “Design QA — seta final do conector da seção Solução” é o registro autoritativo desta alteração. A evidência enviada, as capturas desktop e mobile, a comparação combinada, o degradê, o espaçamento, o alinhamento e o console foram verificados no navegador local.
 
 final result: passed

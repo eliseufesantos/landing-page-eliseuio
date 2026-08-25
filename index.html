@@ -43,7 +43,7 @@
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "x92ymctnva");
   </script>
-  <link rel="stylesheet" href="styles.css?v=20260811-problem-vertical-mobile-cases-flow">
+  <link rel="stylesheet" href="styles.css?v=20260825-solution-connector-arrow-gradient">
 </head>
 <body>
 
@@ -155,37 +155,64 @@
   <section class="section solution-section" id="solucao">
     <div class="container solution-layout">
       <header class="solution-intro" data-reveal>
-        <p class="eyebrow">// produtos que se conectam</p>
-        <h2>Escolha uma frente.<br><span>Ou conecte as três.</span></h2>
-        <p class="solution-intro-copy">Cada produto funciona sozinho. Juntos, formam o sistema.</p>
+        <p class="eyebrow">// o que muda na operação</p>
+        <h2>Agora existe um caminho.</h2>
+        <p class="solution-intro-copy">Informações chegam ao lugar certo, próximos passos ficam claros e tarefas repetitivas deixam de depender da memória e do trabalho manual.</p>
       </header>
+
+      <svg class="solution-connector" id="solutionConnector" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="solutionConnectorFinalGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#176df1"></stop>
+            <stop offset="32%" stop-color="#237ee4"></stop>
+            <stop offset="68%" stop-color="#1baab1"></stop>
+            <stop offset="100%" stop-color="#1fca6b"></stop>
+          </linearGradient>
+        </defs>
+        <path class="solution-connector-path solution-connector-path--primary" id="solutionConnectorPath" pathLength="1"></path>
+        <path class="solution-connector-path solution-connector-path--final" id="solutionConnectorFinalPath" pathLength="1"></path>
+        <g class="solution-connector-cuts">
+          <line></line>
+          <line></line>
+          <line></line>
+        </g>
+        <path class="solution-connector-arrow" id="solutionConnectorArrow"></path>
+      </svg>
 
       <div class="product-stack" aria-label="Produtos Eliseu.io">
         <article class="product-band product-band--sites" data-reveal data-delay="1">
           <div class="product-band-copy">
             <span class="product-icon product-icon--sites" aria-hidden="true"><i data-lucide="monitor"></i></span>
             <h3>Sites</h3>
-            <p class="product-kicker">Gerar oportunidades</p>
-            <p>Landing pages B2B que explicam valor e geram conversas comerciais.</p>
+            <p class="product-kicker">O cliente sabe para onde ir.</p>
+            <p>Sites e experiências digitais que explicam, capturam, agendam ou conduzem cada pessoa ao próximo passo.</p>
           </div>
           <div class="product-visual product-visual--sites">
-            <div class="site-product-preview" aria-label="Exemplo de landing page B2B para uma empresa fictícia">
-              <div class="site-preview-top">
-                <strong class="site-b2b-brand"><i data-lucide="factory" aria-hidden="true"></i> NORTE<span>OPS</span></strong>
-                <span>Soluções&nbsp;&nbsp; Setores&nbsp;&nbsp; Cases</span>
-                <b>Falar com consultor</b>
+            <div class="site-product-preview" role="img" aria-label="Exemplo de landing page B2B para uma empresa fictícia">
+              <div class="site-browser-chrome" aria-hidden="true">
+                <span class="site-browser-dots"><i></i><i></i><i></i></span>
+                <span class="site-browser-url"><i data-lucide="lock-keyhole"></i> norteops.com.br</span>
+                <span class="site-browser-space"></span>
               </div>
-              <div class="site-preview-content">
-                <div class="site-preview-message">
-                  <small>EFICIÊNCIA OPERACIONAL B2B</small>
-                  <h4>Menos retrabalho. Mais margem para crescer.</h4>
-                  <p>Processos, dados e equipe trabalhando no mesmo fluxo.</p>
-                  <span>Solicitar diagnóstico <i data-lucide="arrow-right" aria-hidden="true"></i></span>
+              <div class="site-preview-page" aria-hidden="true">
+                <div class="site-preview-top">
+                  <strong class="site-b2b-brand"><i data-lucide="blocks"></i> NORTE<span>OPS</span></strong>
+                  <span>Serviços&nbsp;&nbsp; Soluções&nbsp;&nbsp; Empresa</span>
+                  <b>Falar com a equipe</b>
                 </div>
-                <div class="site-preview-proof" aria-label="Resultados ilustrativos da empresa fictícia">
-                  <div class="site-proof-heading"><i data-lucide="chart-no-axes-combined" aria-hidden="true"></i><span>Impacto operacional</span></div>
-                  <article><i data-lucide="trending-up" aria-hidden="true"></i><strong>+31%</strong><span>produtividade</span></article>
-                  <article><i data-lucide="clock-3" aria-hidden="true"></i><strong>−22h</strong><span>tarefas manuais/mês</span></article>
+                <div class="site-preview-content">
+                  <div class="site-preview-message">
+                    <small>OPERAÇÃO E TECNOLOGIA</small>
+                    <h4>Seu processo,<br><span>mais simples.</span></h4>
+                    <p>Projetos digitais para conectar equipe, informação e próximos passos.</p>
+                    <span>Conversar sobre o projeto <i data-lucide="arrow-right"></i></span>
+                  </div>
+                  <div class="site-preview-scope">
+                    <strong>Escopo do projeto</strong>
+                    <span>Páginas institucionais</span>
+                    <span>Captação de contatos</span>
+                    <span>Agendamentos integrados</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -196,8 +223,8 @@
           <div class="product-band-copy">
             <img class="product-kommo-mark" src="assets/kommo-mark.png" alt="Kommo">
             <h3>CRM com Kommo</h3>
-            <p class="product-kicker">Organizar vendas</p>
-            <p>Leads, conversas e negócios no mesmo lugar.</p>
+            <p class="product-kicker">A equipe sabe o que fazer.</p>
+            <p>Conversas, leads e oportunidades organizados com contexto, responsável e próximo passo claros.</p>
           </div>
           <div class="product-visual product-visual--crm">
             <div class="crm-product-preview" aria-label="Exemplo de funil comercial no Kommo">
@@ -224,8 +251,8 @@
           <div class="product-band-copy">
             <span class="product-icon product-icon--automation" aria-hidden="true"><i data-lucide="sparkles"></i></span>
             <h3>Automação &amp; IA</h3>
-            <p class="product-kicker">Executar e conectar</p>
-            <p>Fluxos e agentes cuidando do trabalho repetitivo.</p>
+            <p class="product-kicker">O processo continua andando.</p>
+            <p>Fluxos e agentes movem informações, executam tarefas e conectam etapas que não precisam continuar manuais.</p>
           </div>
           <div class="product-visual product-visual--automation">
             <div class="automation-product-preview" aria-label="Exemplo de automação conectada">
@@ -243,7 +270,7 @@
 
       <div class="solution-intro-action solution-end" data-reveal>
         <a class="btn solution-cta" href="https://wa.me/5511916192015" target="_blank" rel="noopener">
-          Encontrar minha combinação <span aria-hidden="true">↗</span>
+          Simplificar minha operação <span aria-hidden="true">↗</span>
         </a>
       </div>
     </div>
@@ -524,6 +551,6 @@
 </a>
 
 <script src="assets/vendor/lucide.min.js?v=20260808"></script>
-<script src="script.js?v=20260808-solution-icons-b2b-case-global-state"></script>
+<script src="script.js?v=20260825-solution-connector-arrow-gradient"></script>
 </body>
 </html>

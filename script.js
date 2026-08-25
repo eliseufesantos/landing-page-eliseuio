@@ -313,6 +313,153 @@
     setTimeout(check, 450);
   }
 
+  function setupSolutionConnector() {
+    var section = document.getElementById("solucao");
+    var layout = section ? section.querySelector(".solution-layout") : null;
+    var svg = document.getElementById("solutionConnector");
+    var path = document.getElementById("solutionConnectorPath");
+    var finalPath = document.getElementById("solutionConnectorFinalPath");
+    var finalGradient = document.getElementById("solutionConnectorFinalGradient");
+    var arrow = document.getElementById("solutionConnectorArrow");
+    var cuts = svg ? Array.prototype.slice.call(svg.querySelectorAll(".solution-connector-cuts line")) : [];
+    var site = section ? section.querySelector(".product-band--sites .product-visual") : null;
+    var crm = section ? section.querySelector(".product-band--crm .product-visual") : null;
+    var automation = section ? section.querySelector(".product-band--automation .product-visual") : null;
+    var cta = section ? section.querySelector(".solution-cta") : null;
+    var frame = 0;
+
+    if (!section || !layout || !svg || !path || !finalPath || !finalGradient || !arrow || !site || !crm || !automation || !cta || cuts.length < 3) return;
+
+    var relativeBox = function (element, layoutBox) {
+      var node = element;
+      var left = 0;
+      var top = 0;
+
+      while (node && node !== layout) {
+        left += node.offsetLeft;
+        top += node.offsetTop;
+        node = node.offsetParent;
+      }
+
+      if (node !== layout) {
+        var fallback = element.getBoundingClientRect();
+        left = fallback.left - layoutBox.left;
+        top = fallback.top - layoutBox.top;
+      }
+
+      return {
+        top: top,
+        right: left + element.offsetWidth,
+        bottom: top + element.offsetHeight,
+        left: left,
+        width: element.offsetWidth,
+        height: element.offsetHeight
+      };
+    };
+
+    var setCut = function (line, x, y) {
+      line.setAttribute("x1", (x - 5).toFixed(2));
+      line.setAttribute("y1", (y + 5).toFixed(2));
+      line.setAttribute("x2", (x + 5).toFixed(2));
+      line.setAttribute("y2", (y - 5).toFixed(2));
+    };
+
+    var update = function () {
+      frame = 0;
+
+      var layoutBox = layout.getBoundingClientRect();
+      if (!layoutBox.width || !layoutBox.height) return;
+
+      var siteBox = relativeBox(site, layoutBox);
+      var crmBox = relativeBox(crm, layoutBox);
+      var automationBox = relativeBox(automation, layoutBox);
+      var ctaBox = relativeBox(cta, layoutBox);
+      var isMobile = window.innerWidth <= 760;
+      var inset = isMobile ? 20 : 16;
+      var minimumX = Math.max(
+        siteBox.left + inset,
+        crmBox.left + inset,
+        automationBox.left + inset,
+        ctaBox.left + inset
+      );
+      var maximumX = Math.min(
+        siteBox.right - inset,
+        crmBox.right - inset,
+        automationBox.right - inset,
+        ctaBox.right - inset
+      );
+      var preferredX = layoutBox.width / 2;
+      var lineX = minimumX <= maximumX
+        ? Math.min(Math.max(preferredX, minimumX), maximumX)
+        : layoutBox.width / 2;
+      var primaryD = "M " + lineX.toFixed(2) + " " + siteBox.bottom.toFixed(2) +
+        " L " + lineX.toFixed(2) + " " + automationBox.bottom.toFixed(2);
+      var cutAfter = function (from, to) {
+        var distance = Math.max(0, to - from);
+        return from + Math.min(44, Math.max(24, distance * 0.24));
+      };
+      var arrowGap = isMobile ? 12 : 16;
+      var arrowShaftHalf = isMobile ? 3.5 : 4;
+      var arrowHeadHalf = isMobile ? 9 : 11;
+      var arrowHeadHeight = isMobile ? 8 : 10;
+      var arrowShaftHeight = isMobile ? 8 : 10;
+      var arrowTip = ctaBox.top - arrowGap;
+      var arrowHeadBase = arrowTip - arrowHeadHeight;
+      var arrowTop = arrowHeadBase - arrowShaftHeight;
+      var finalD = "M " + lineX.toFixed(2) + " " + automationBox.bottom.toFixed(2) +
+        " L " + lineX.toFixed(2) + " " + (arrowTop + 1).toFixed(2);
+      var finalSpan = Math.max(0, arrowTop - automationBox.bottom);
+      var arrowD = "M " + (lineX - arrowShaftHalf).toFixed(2) + " " + arrowTop.toFixed(2) +
+        " L " + (lineX + arrowShaftHalf).toFixed(2) + " " + arrowTop.toFixed(2) +
+        " L " + (lineX + arrowShaftHalf).toFixed(2) + " " + arrowHeadBase.toFixed(2) +
+        " L " + (lineX + arrowHeadHalf).toFixed(2) + " " + arrowHeadBase.toFixed(2) +
+        " L " + lineX.toFixed(2) + " " + arrowTip.toFixed(2) +
+        " L " + (lineX - arrowHeadHalf).toFixed(2) + " " + arrowHeadBase.toFixed(2) +
+        " L " + (lineX - arrowShaftHalf).toFixed(2) + " " + arrowHeadBase.toFixed(2) + " Z";
+
+      svg.setAttribute("viewBox", "0 0 " + layoutBox.width.toFixed(2) + " " + layoutBox.height.toFixed(2));
+      finalGradient.setAttribute("y1", automationBox.bottom.toFixed(2));
+      finalGradient.setAttribute("y2", arrowTip.toFixed(2));
+      path.setAttribute("d", primaryD);
+      finalPath.setAttribute("d", finalD);
+      arrow.setAttribute("d", arrowD);
+      setCut(cuts[0], lineX, cutAfter(siteBox.bottom, crmBox.top));
+      setCut(cuts[1], lineX, cutAfter(crmBox.bottom, automationBox.top));
+      setCut(cuts[2], lineX, automationBox.bottom + finalSpan * 0.46);
+    };
+
+    var queueUpdate = function () {
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+
+    var activate = function () { svg.classList.add("is-ready"); };
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        activate();
+        observer.disconnect();
+      }, { threshold: 0.08 });
+      observer.observe(section);
+    } else {
+      activate();
+    }
+
+    if ("ResizeObserver" in window) {
+      var resizeObserver = new ResizeObserver(queueUpdate);
+      resizeObserver.observe(layout);
+    }
+
+    window.addEventListener("resize", queueUpdate, { passive: true });
+    window.addEventListener("load", queueUpdate, { once: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueUpdate);
+
+    update();
+    setTimeout(queueUpdate, 160);
+    setTimeout(queueUpdate, 520);
+  }
+
   function setupIcons() {
     if (!window.lucide || typeof window.lucide.createIcons !== "function") return;
     window.lucide.createIcons({
@@ -331,6 +478,7 @@
     setupHeader();
     setupFaq();
     setupReveals();
+    setupSolutionConnector();
   }
 
   if (document.readyState === "loading") {

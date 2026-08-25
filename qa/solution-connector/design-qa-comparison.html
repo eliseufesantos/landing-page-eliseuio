@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparação — conector da solução</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 24px; background: #e9edf3; color: #101828; font-family: Arial, sans-serif; }
+    h1 { margin: 0 0 20px; font-size: 24px; }
+    .comparison { display: grid; grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr); gap: 20px; align-items: start; }
+    .panel { padding: 14px; border: 1px solid #d0d8e4; border-radius: 16px; background: #fff; }
+    .panel h2 { margin: 0 0 12px; font-size: 15px; }
+    .panel img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    .implementation { display: grid; gap: 14px; }
+  </style>
+</head>
+<body>
+  <h1>Conector segmentado — referência × implementação</h1>
+  <main class="comparison">
+    <section class="panel">
+      <h2>Referência selecionada</h2>
+      <img src="reference-option-3.png" alt="Mock selecionado">
+    </section>
+    <section class="implementation">
+      <div class="panel">
+        <h2>Implementação — fluxo</h2>
+        <img src="implemented-segmented-flow.png" alt="Implementação do fluxo">
+      </div>
+      <div class="panel">
+        <h2>Implementação — CTA</h2>
+        <img src="implemented-segmented-cta.png" alt="Implementação da chegada no CTA">
+      </div>
+      <div class="panel">
+        <h2>Implementação — mobile</h2>
+        <img src="implemented-segmented-mobile-cta.png" alt="Implementação mobile">
+      </div>
+    </section>
+  </main>
+</body>
+</html>
